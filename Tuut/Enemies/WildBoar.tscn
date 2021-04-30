@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Enemies/wildboar.png" type="Texture" id=1]
+[ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemies/WildBoar.gd" type="Script" id=3]
+[ext_resource path="res://Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=5]
+height = 25.1593
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 14.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 31.3
+height = 107.139
+
+[node name="WildBoar" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 16
+collision_mask = 17
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -23.2567 )
+frames = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -10.2567 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -15.2567 )
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, 2 )
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="Stats" parent="." instance=ExtResource( 4 )]
+max_health = 2
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+position = Vector2( 0.0692978, -21.9526 )
+rotation = 1.5708
+shape = SubResource( 7 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+
+[editable path="Hurtbox"]
+
+[editable path="PlayerDetectionZone"]

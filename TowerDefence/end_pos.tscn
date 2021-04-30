@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SP-Tileset.png" type="Texture" id=1]
+
+[node name="end_pos" type="Position2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 39
+hframes = 16
+frame = 336

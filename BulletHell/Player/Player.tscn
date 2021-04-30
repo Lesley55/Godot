@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player/spaceship.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Weapons/WeaponHolder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.237037, 1 )
+colors = PoolColorArray( 0.464844, 0, 0, 1, 1, 0, 0, 1, 1, 0.784314, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.161364 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 35.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.3
+angular_velocity = 500.0
+angular_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 50.0
+scale = 5.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 13.2977
+height = 40.67
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 8.93531
+height = 41.3517
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Engine" type="Particles2D" parent="."]
+position = Vector2( 0, 20.7995 )
+emitting = false
+amount = 200
+lifetime = 0.5
+process_material = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 2
+frame = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -12.3024 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -35.3197, -2.77795 )
+rotation = -1.97222
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 35.32, -2.778 )
+rotation = 1.97222
+shape = SubResource( 7 )
+
+[node name="WeaponPositions" type="Node2D" parent="."]
+
+[node name="Main" parent="WeaponPositions" instance=ExtResource( 3 )]
+position = Vector2( 0, -35 )
+
+[node name="LF" parent="WeaponPositions" instance=ExtResource( 3 )]
+position = Vector2( -30, -5 )
+
+[node name="Weapon" parent="WeaponPositions/LF" instance=ExtResource( 4 )]
+scale = Vector2( 5, 5 )
+ammunition = "res://Weapons/Bullet.tscn"
+shooting_speed = 0.2
+
+[node name="RF" parent="WeaponPositions" instance=ExtResource( 3 )]
+position = Vector2( 30, -5 )
+
+[node name="Weapon" parent="WeaponPositions/RF" instance=ExtResource( 4 )]
+scale = Vector2( 5, 5 )
+ammunition = "res://Weapons/Bullet.tscn"
+shooting_speed = 0.2
+
+[node name="LB" parent="WeaponPositions" instance=ExtResource( 3 )]
+position = Vector2( -54, 5 )
+
+[node name="RB" parent="WeaponPositions" instance=ExtResource( 3 )]
+position = Vector2( 54, 5 )
+
+[node name="LowHealthPulseSound" type="AudioStreamPlayer2D" parent="."]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

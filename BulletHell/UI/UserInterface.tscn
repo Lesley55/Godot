@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI/ChangeSceneButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/Title.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/RetryButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/QuitButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/UserInterface.gd" type="Script" id=5]
+[ext_resource path="res://Theme/theme.tres" type="Theme" id=6]
+[ext_resource path="res://Stats/HealthBar.tscn" type="PackedScene" id=7]
+
+[node name="UserInterface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -448.0
+margin_top = 30.0
+margin_right = -20.0
+margin_bottom = 18.0
+text = "Score: %s"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBar" parent="." instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 251.0
+margin_bottom = 66.0
+will_pulse = true
+
+[node name="HealthUnder" parent="HealthBar" index="0"]
+margin_left = 12.0
+margin_top = -56.0
+margin_bottom = 16.0
+rect_scale = Vector2( 3, 3 )
+
+[node name="HealthOver" parent="HealthBar" index="1"]
+margin_left = 12.0
+margin_top = -56.0
+margin_bottom = 16.0
+rect_scale = Vector2( 3, 3 )
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -2.41431
+margin_top = 0.374573
+margin_right = -2.41431
+margin_bottom = 0.374634
+color = Color( 0, 0, 0, 0.235294 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="PauseOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -236.5
+margin_top = -201.5
+margin_right = 236.5
+margin_bottom = 201.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" parent="PauseOverlay/Panel" instance=ExtResource( 2 )]
+margin_left = -94.0
+margin_top = -155.24
+margin_right = 94.0
+margin_bottom = -112.24
+text = "Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseOverlay/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -183.5
+margin_top = -103.5
+margin_right = 181.5
+margin_bottom = 135.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryButton" parent="PauseOverlay/Panel/VBoxContainer" instance=ExtResource( 3 )]
+margin_right = 365.0
+margin_bottom = 77.0
+
+[node name="ChangeSceneButton" parent="PauseOverlay/Panel/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 81.0
+margin_right = 365.0
+margin_bottom = 158.0
+text = "Main Screen"
+next_scene_path = "res://UI/TitleScreen.tscn"
+
+[node name="QuitButton" parent="PauseOverlay/Panel/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 162.0
+margin_right = 365.0
+margin_bottom = 239.0
+
+[editable path="HealthBar"]

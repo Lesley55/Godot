@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="Title" type="Label"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.5
+margin_top = -33.5
+margin_right = 160.5
+margin_bottom = 33.5
+text = "Labyrint Dungeon"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

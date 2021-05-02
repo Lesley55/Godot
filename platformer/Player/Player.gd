@@ -26,17 +26,19 @@ onready var hitbox = $HitboxPivot/SwordHitbox
 func _ready():
 	animationTree.active = true
 	hitbox.knockback_vector = velocity
+	
+	$StateMachine.initialize($StateMachine.START_STATE)
 
 func _physics_process(delta):
 	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	
-	match state:
-		MOVE:
-			move_state(delta, x_input)
-		JUMP:
-			jump_state(delta, x_input)
-		ATTACK:
-			attack_state(delta)
+
+#	match state:
+#		MOVE:
+#			move_state(delta, x_input)
+#		JUMP:
+#			jump_state(delta, x_input)
+#		ATTACK:
+#			attack_state(delta)
 	
 #	scenechanger test
 	if Input.is_action_just_pressed("ui_home"):
@@ -90,7 +92,7 @@ func move_state(delta, x_input):
 			animationState.travel("jump")
 		elif velocity.y > 0:
 			animationState.travel("fall")
-		
+
 		if x_input == 0:
 			velocity.x = lerp(velocity.x, 0, AIR_RESISTANCE * delta)
 	
@@ -113,7 +115,6 @@ func attack_state(delta):
 
 func attack_animation_finished():
 	state = MOVE
-
 
 
 

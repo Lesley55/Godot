@@ -4,10 +4,10 @@
 [ext_resource path="res://UI/Title.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/RetryButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/QuitButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://UI/UserInterface.gd" type="Script" id=5]
-[ext_resource path="res://Theme/theme.tres" type="Theme" id=6]
+[ext_resource path="res://UI/HUD.gd" type="Script" id=5]
+[ext_resource path="res://Themes/theme.tres" type="Theme" id=6]
 
-[node name="UserInterface" type="Control"]
+[node name="HUD" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0

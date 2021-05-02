@@ -1,6 +1,6 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://Theme/Fonts/kongtext.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Themes/Fonts/kongtext.ttf" type="DynamicFontData" id=1]
 
 [resource]
 extra_spacing_top = 1

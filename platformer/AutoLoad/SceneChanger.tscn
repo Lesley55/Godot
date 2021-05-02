@@ -4,14 +4,13 @@
 [ext_resource path="res://Shaders/SceneChanger.shader" type="Shader" id=2]
 [ext_resource path="res://Shaders/mask.png" type="Texture" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/cutoff = 1.0
 shader_param/smooth_size = 0.18
 shader_param/mask = ExtResource( 3 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "fade"
+[sub_resource type="Animation" id=2]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Black:material:shader_param/cutoff")
@@ -37,7 +36,7 @@ __meta__ = {
 }
 
 [node name="Black" type="ColorRect" parent="Control"]
-material = SubResource( 2 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
@@ -46,4 +45,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fade = SubResource( 1 )
+anims/fade = SubResource( 2 )

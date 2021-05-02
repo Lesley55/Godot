@@ -6,6 +6,7 @@ const FRICTION = 10
 const AIR_RESISTANCE = 2
 const GRAVITY = 400
 const JUMP_FORCE = 9600 # 160 * delta (60fps)
+const DROP_THRU_BIT = 9
 
 enum {
 	MOVE,
@@ -17,7 +18,6 @@ var state = MOVE
 var velocity = Vector2.ZERO
 
 onready var sprite = $Sprite
-#onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var hitboxPivot = $HitboxPivot
@@ -37,6 +37,10 @@ func _physics_process(delta):
 			jump_state(delta, x_input)
 		ATTACK:
 			attack_state(delta)
+	
+#	scenechanger test
+	if Input.is_action_just_pressed("ui_home"):
+		SceneChanger.change_scene("res://Levels/Level1.tscn")
 	
 #	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -75,9 +79,12 @@ func move_state(delta, x_input):
 		if Input.is_action_just_pressed("attack"):
 			state = ATTACK
 		
-		if Input.is_action_pressed("jump"): # can hold, but instand animation feels like it isn't touching the ground
-			velocity.y = -JUMP_FORCE * delta
-#			state = JUMP
+		if Input.is_action_pressed("jump"): # can hold, but instant animation feels like it isn't touching the ground
+			if Input.is_action_pressed("ui_down") && self.get_collision_mask_bit(DROP_THRU_BIT):
+				set_collision_mask_bit(DROP_THRU_BIT, false)
+			else:
+				velocity.y = -JUMP_FORCE * delta
+#				state = JUMP
 	else:
 		if velocity.y < 0:
 			animationState.travel("jump")
@@ -107,3 +114,21 @@ func attack_state(delta):
 func attack_animation_finished():
 	state = MOVE
 
+
+
+
+func take_damage(attacker, amount, effect=null):
+	if self.is_a_parent_of(attacker):
+		return
+	$States/Stagger.knockback_direction = (attacker.global_position - global_position).normalized()
+	$Health.take_damage(amount, effect)
+
+func set_dead(value):
+	set_process_input(not value)
+	set_physics_process(not value)
+	$CollisionShape2D.disabled = value
+
+
+func _on_Area2D_body_exited(body):
+#	if body.get_collision_mask_bit(DROP_THRU_BIT):
+	set_collision_mask_bit(DROP_THRU_BIT, true)

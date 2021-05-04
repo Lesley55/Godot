@@ -5,6 +5,8 @@ signal state_changed(current_state)
 export(NodePath) var START_STATE
 var states_map = {}
 
+# actually max 2 states on the stack because i only need previous state
+# leaving the array for if i want to use more states stacked in the future
 var states_stack = []
 var current_state = null
 var _active = false setget set_active
@@ -34,6 +36,9 @@ func _input(event):
 func _physics_process(delta):
 	current_state.update(delta)
 
+# normally you can just connect AnimationPlayer on animation finished signal to this
+# but because of a bug in the godot engine the signal doesnt fire with the AnimationTree
+# so i had to add a call method to the end of every animation that needs it manually
 func _on_animation_finished(anim_name):
 	if not _active:
 		return
@@ -52,7 +57,9 @@ func _change_state(state_name):
 	current_state = states_stack[0]
 	emit_signal("state_changed", current_state)
 	
-	if state_name != "previous":
-		current_state.enter()
+#	if state_name != "previous":
+#		current_state.enter()
+	current_state.enter()
 	
 	print(states_stack.size())
+	print(current_state.name)

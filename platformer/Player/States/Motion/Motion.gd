@@ -1,8 +1,5 @@
 extends "res://StateMachine/State.gd"
 
-var speed = 0.0
-var velocity = Vector2.ZERO
-
 # stagger?
 
 func get_input_direction():

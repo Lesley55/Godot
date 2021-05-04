@@ -1,7 +1,7 @@
 extends "../OnGround.gd"
 
-export(float) var CROUCH_ACCELERATION = 512
-export(float) var MAX_CROUCH_SPEED = 40
+export var CROUCH_ACCELERATION = 512
+export var MAX_CROUCH_SPEED = 40
 
 func enter():
 	owner.animationState.travel("crouch_idle")
@@ -12,8 +12,7 @@ func update(delta):
 		owner.animationState.travel("crouch_idle")
 	else:
 		owner.animationState.travel("crouch_walk")
-	
-	owner._set_direction(input_direction)
+		owner._set_direction(input_direction)
 	
 	# accelerate / move
 	owner.velocity.x += input_direction.x * CROUCH_ACCELERATION * delta
@@ -28,5 +27,10 @@ func update(delta):
 	
 	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
 	
+#	if Input.is_action_just_pressed("crouch") || Input.is_action_just_pressed("jump"): # jumps after
 	if Input.is_action_just_pressed("crouch"):
+		get_tree().set_input_as_handled()
 		emit_signal("finished", "idle")
+	elif !owner.is_on_floor():
+		emit_signal("finished", "jump")
+	

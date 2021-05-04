@@ -1,7 +1,7 @@
 extends "../Motion.gd"
 
-export(float) var AIR_ACCELERATION = 256
-export(float) var MAX_AIR_SPEED = 120 # same speed as running
+export var AIR_ACCELERATION = 256
+export var MAX_AIR_SPEED = 120 # same speed as running
 
 func enter():
 	owner.animationState.travel("jump")
@@ -14,7 +14,8 @@ func update(delta):
 	elif owner.velocity.y >= 0:
 		owner.animationState.travel("fall")
 	
-	owner._set_direction(input_direction)
+	if input_direction.x != 0:
+		owner._set_direction(input_direction)
 	
 	# accelerate / move
 	owner.velocity.x += input_direction.x * AIR_ACCELERATION * delta

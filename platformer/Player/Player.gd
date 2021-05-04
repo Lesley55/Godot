@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 export(float) var FRICTION = 10
 export(float) var AIR_RESISTANCE = 2
-export(float) var GRAVITY = 400
-export(float) var JUMP_FORCE = 9600 # 160 * 60 fps for delta
+export var GRAVITY = 400
+export var JUMP_FORCE = 9600 # 160 * 60 fps for delta
 const DROP_THRU_BIT = 9
 
 var velocity = Vector2.ZERO
@@ -21,9 +21,11 @@ func _ready():
 	$StateMachine.initialize($StateMachine.START_STATE)
 
 func _physics_process(delta):
-#	scenechanger test
+#	tests
 	if Input.is_action_just_pressed("ui_home"):
 		SceneChanger.change_scene("res://Levels/Level1.tscn")
+	if Input.is_action_just_pressed("ui_end"):
+		$StateMachine._change_state("knocked_down")
 
 func _set_direction(direction):
 	# set attack knockback direction

@@ -5,8 +5,6 @@ signal state_changed(current_state)
 export(NodePath) var START_STATE
 var states_map = {}
 
-# actually max 2 states on the stack because i only need previous state
-# leaving the array for if i want to use more states stacked in the future
 var states_stack = []
 var current_state = null
 var _active = false setget set_active
@@ -58,8 +56,9 @@ func _change_state(state_name):
 	emit_signal("state_changed", current_state)
 	
 #	if state_name != "previous":
-#		current_state.enter()
 	current_state.enter()
 	
-	print(states_stack.size())
-	print(current_state.name)
+	var s = []
+	for state in states_stack:
+		s.push_front(state.name)
+	print(s)

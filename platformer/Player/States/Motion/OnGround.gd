@@ -17,5 +17,8 @@ func on_floor_action(delta, input_direction):
 				owner.velocity.y = -owner.JUMP_FORCE * delta
 			emit_signal("finished", "jump")
 			return true
-	
-	return false
+		# no state changed:
+		return false
+	else:
+		emit_signal("finished", "jump")
+		return true

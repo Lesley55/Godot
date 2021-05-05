@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=2]
+[gd_scene load_steps=147 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/adventurer.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Player/States/Combat/Attack.gd" type="Script" id=12]
 [ext_resource path="res://Player/States/Combat/AirAttack.gd" type="Script" id=13]
 [ext_resource path="res://Player/States/Combat/KnockedDown.gd" type="Script" id=14]
+[ext_resource path="res://Player/States/Motion/Air/WallSlide.gd" type="Script" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.4375
@@ -775,6 +776,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=38]
 resource_name = "somersault"
 length = 0.7
+loop = true
 step = 0.175
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -787,6 +789,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 19, 20, 21 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "somersault" ],
+"method": "_on_animation_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=39]
@@ -985,6 +1001,15 @@ animation = "attack2"
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "attack3"
 
+[sub_resource type="AnimationNodeAnimation" id=131]
+animation = "corner_climb"
+
+[sub_resource type="AnimationNodeAnimation" id=132]
+animation = "corner_grab"
+
+[sub_resource type="AnimationNodeAnimation" id=133]
+animation = "corner_jump"
+
 [sub_resource type="AnimationNodeAnimation" id=56]
 animation = "crouch_idle"
 
@@ -1009,17 +1034,29 @@ animation = "jump"
 [sub_resource type="AnimationNodeAnimation" id=63]
 animation = "knock_down"
 
+[sub_resource type="AnimationNodeAnimation" id=134]
+animation = "ladder_climb"
+
 [sub_resource type="AnimationNodeAnimation" id=64]
 animation = "run"
 
 [sub_resource type="AnimationNodeAnimation" id=65]
 animation = "slide"
 
+[sub_resource type="AnimationNodeAnimation" id=111]
+animation = "somersault"
+
 [sub_resource type="AnimationNodeAnimation" id=66]
 animation = "stand"
 
-[sub_resource type="AnimationNodeAnimation" id=67]
+[sub_resource type="AnimationNodeAnimation" id=115]
 animation = "walk"
+
+[sub_resource type="AnimationNodeAnimation" id=135]
+animation = "wall_run"
+
+[sub_resource type="AnimationNodeAnimation" id=116]
+animation = "wall_slide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=68]
 
@@ -1102,14 +1139,6 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=98]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=99]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=100]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=101]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=102]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=103]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=104]
@@ -1118,51 +1147,101 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=106]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=119]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=120]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=121]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=122]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=123]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=124]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=125]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=126]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=129]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=130]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=136]
+
 [sub_resource type="AnimationNodeStateMachine" id=107]
 states/air_attack1/node = SubResource( 48 )
-states/air_attack1/position = Vector2( 515, 347 )
+states/air_attack1/position = Vector2( 194, 664 )
 states/air_attack2/node = SubResource( 49 )
-states/air_attack2/position = Vector2( 756, 347 )
+states/air_attack2/position = Vector2( 194, 583 )
 states/air_attack3_end/node = SubResource( 50 )
-states/air_attack3_end/position = Vector2( 267, 445 )
+states/air_attack3_end/position = Vector2( 194, 347 )
 states/air_attack3_loop/node = SubResource( 51 )
-states/air_attack3_loop/position = Vector2( 515, 445 )
+states/air_attack3_loop/position = Vector2( 194, 426 )
 states/air_attack3_ready/node = SubResource( 52 )
-states/air_attack3_ready/position = Vector2( 756, 445 )
+states/air_attack3_ready/position = Vector2( 194, 503 )
 states/attack1/node = SubResource( 53 )
 states/attack1/position = Vector2( 194, 95 )
 states/attack2/node = SubResource( 54 )
-states/attack2/position = Vector2( 194, 182 )
+states/attack2/position = Vector2( 194, 171 )
 states/attack3/node = SubResource( 55 )
-states/attack3/position = Vector2( 194, 264 )
+states/attack3/position = Vector2( 194, 250 )
+states/corner_climb/node = SubResource( 131 )
+states/corner_climb/position = Vector2( 1276, 664 )
+states/corner_grab/node = SubResource( 132 )
+states/corner_grab/position = Vector2( 1072, 664 )
+states/corner_jump/node = SubResource( 133 )
+states/corner_jump/position = Vector2( 1072, 736 )
 states/crouch_idle/node = SubResource( 56 )
-states/crouch_idle/position = Vector2( 278, -91 )
+states/crouch_idle/position = Vector2( 194, -75 )
 states/crouch_walk/node = SubResource( 57 )
-states/crouch_walk/position = Vector2( 278, -194 )
+states/crouch_walk/position = Vector2( 194, -157 )
 states/die/node = SubResource( 58 )
-states/die/position = Vector2( 194, -5 )
+states/die/position = Vector2( 194, 16 )
 states/fall/node = SubResource( 59 )
-states/fall/position = Vector2( 756, 226 )
+states/fall/position = Vector2( 868, 503 )
 states/get_up/node = SubResource( 60 )
-states/get_up/position = Vector2( 693, -122 )
+states/get_up/position = Vector2( 684, -157 )
 states/idle/node = SubResource( 61 )
 states/idle/position = Vector2( 515, 95 )
 states/jump/node = SubResource( 62 )
-states/jump/position = Vector2( 515, 226 )
+states/jump/position = Vector2( 515, 503 )
 states/knock_down/node = SubResource( 63 )
-states/knock_down/position = Vector2( 756, -14 )
+states/knock_down/position = Vector2( 868, -157 )
+states/ladder_climb/node = SubResource( 134 )
+states/ladder_climb/position = Vector2( 868, 747 )
 states/run/node = SubResource( 64 )
-states/run/position = Vector2( 756, 95 )
+states/run/position = Vector2( 868, 95 )
 states/slide/node = SubResource( 65 )
-states/slide/position = Vector2( 515, -122 )
+states/slide/position = Vector2( 515, -157 )
+states/somersault/node = SubResource( 111 )
+states/somersault/position = Vector2( 515, 664 )
 states/stand/node = SubResource( 66 )
-states/stand/position = Vector2( 515, -14 )
-states/walk/node = SubResource( 67 )
-states/walk/position = Vector2( 636, 95 )
-transitions = [ "idle", "run", SubResource( 68 ), "run", "idle", SubResource( 69 ), "idle", "jump", SubResource( 70 ), "run", "jump", SubResource( 71 ), "jump", "fall", SubResource( 72 ), "fall", "idle", SubResource( 73 ), "fall", "run", SubResource( 74 ), "idle", "attack1", SubResource( 75 ), "attack1", "idle", SubResource( 76 ), "idle", "fall", SubResource( 77 ), "run", "fall", SubResource( 78 ), "attack1", "attack2", SubResource( 79 ), "attack2", "attack3", SubResource( 80 ), "attack3", "idle", SubResource( 81 ), "slide", "stand", SubResource( 82 ), "attack2", "idle", SubResource( 83 ), "run", "slide", SubResource( 84 ), "stand", "idle", SubResource( 85 ), "run", "knock_down", SubResource( 86 ), "idle", "knock_down", SubResource( 87 ), "knock_down", "get_up", SubResource( 88 ), "get_up", "idle", SubResource( 89 ), "air_attack1", "air_attack2", SubResource( 90 ), "air_attack2", "air_attack3_ready", SubResource( 91 ), "air_attack3_ready", "air_attack3_loop", SubResource( 92 ), "air_attack3_loop", "air_attack3_end", SubResource( 93 ), "jump", "air_attack1", SubResource( 94 ), "air_attack3_end", "idle", SubResource( 95 ), "air_attack2", "fall", SubResource( 96 ), "air_attack1", "fall", SubResource( 97 ), "idle", "die", SubResource( 98 ), "run", "walk", SubResource( 99 ), "walk", "run", SubResource( 100 ), "idle", "walk", SubResource( 101 ), "walk", "idle", SubResource( 102 ), "crouch_walk", "crouch_idle", SubResource( 103 ), "crouch_idle", "crouch_walk", SubResource( 104 ), "crouch_idle", "idle", SubResource( 105 ), "idle", "crouch_idle", SubResource( 106 ) ]
+states/stand/position = Vector2( 515, -75 )
+states/walk/node = SubResource( 115 )
+states/walk/position = Vector2( 684, 46 )
+states/wall_run/node = SubResource( 135 )
+states/wall_run/position = Vector2( 1369, 787 )
+states/wall_slide/node = SubResource( 116 )
+states/wall_slide/position = Vector2( 868, 664 )
+transitions = [ "idle", "run", SubResource( 68 ), "run", "idle", SubResource( 69 ), "idle", "jump", SubResource( 70 ), "run", "jump", SubResource( 71 ), "jump", "fall", SubResource( 72 ), "fall", "idle", SubResource( 73 ), "fall", "run", SubResource( 74 ), "idle", "attack1", SubResource( 75 ), "attack1", "idle", SubResource( 76 ), "idle", "fall", SubResource( 77 ), "run", "fall", SubResource( 78 ), "attack1", "attack2", SubResource( 79 ), "attack2", "attack3", SubResource( 80 ), "attack3", "idle", SubResource( 81 ), "slide", "stand", SubResource( 82 ), "attack2", "idle", SubResource( 83 ), "run", "slide", SubResource( 84 ), "stand", "idle", SubResource( 85 ), "run", "knock_down", SubResource( 86 ), "idle", "knock_down", SubResource( 87 ), "knock_down", "get_up", SubResource( 88 ), "get_up", "idle", SubResource( 89 ), "air_attack1", "air_attack2", SubResource( 90 ), "air_attack2", "air_attack3_ready", SubResource( 91 ), "air_attack3_ready", "air_attack3_loop", SubResource( 92 ), "air_attack3_loop", "air_attack3_end", SubResource( 93 ), "jump", "air_attack1", SubResource( 94 ), "air_attack3_end", "idle", SubResource( 95 ), "air_attack2", "fall", SubResource( 96 ), "air_attack1", "fall", SubResource( 97 ), "idle", "die", SubResource( 98 ), "crouch_walk", "crouch_idle", SubResource( 103 ), "crouch_idle", "crouch_walk", SubResource( 104 ), "crouch_idle", "idle", SubResource( 105 ), "idle", "crouch_idle", SubResource( 106 ), "jump", "somersault", SubResource( 112 ), "fall", "somersault", SubResource( 113 ), "somersault", "fall", SubResource( 114 ), "idle", "walk", SubResource( 117 ), "walk", "run", SubResource( 118 ), "run", "walk", SubResource( 119 ), "walk", "idle", SubResource( 120 ), "walk", "knock_down", SubResource( 121 ), "walk", "crouch_walk", SubResource( 122 ), "walk", "jump", SubResource( 123 ), "walk", "fall", SubResource( 124 ), "fall", "walk", SubResource( 125 ), "fall", "wall_slide", SubResource( 126 ), "jump", "wall_slide", SubResource( 127 ), "wall_slide", "jump", SubResource( 128 ), "wall_slide", "fall", SubResource( 129 ), "wall_slide", "idle", SubResource( 130 ), "corner_grab", "corner_climb", SubResource( 136 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -131, -107 )
+graph_offset = Vector2( 214, 229 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=108]
 
@@ -1178,7 +1257,6 @@ scale = Vector2( 1.2, 1.2 )
 collision_layer = 2
 collision_mask = 513
 script = ExtResource( 1 )
-JUMP_FORCE = 10800
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -1195,6 +1273,9 @@ script = ExtResource( 8 )
 
 [node name="Slide" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
+
+[node name="WallSlide" type="Node" parent="StateMachine"]
+script = ExtResource( 15 )
 
 [node name="Crouch" type="Node" parent="StateMachine"]
 script = ExtResource( 11 )

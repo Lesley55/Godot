@@ -7,13 +7,19 @@ func enter():
 	owner.animationState.travel("slide")
 
 func update(delta):
+	# apply gravity
+	owner.velocity.y += owner.GRAVITY * delta
+	
 	# apply friction
 	owner.velocity.x = lerp(owner.velocity.x, 0, SLIDE_FRICTION * delta)
 	
 	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
 	
 	if -STAND_SPEED <= owner.velocity.x || owner.velocity.x <= STAND_SPEED:
-		owner.animationState.travel("stand")
+		if !owner.is_on_floor():
+			emit_signal("finished", "move")
+		else:
+			owner.animationState.travel("stand")
 
 func _on_animation_finished(anim_name):
 	match anim_name:

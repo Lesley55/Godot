@@ -3,16 +3,22 @@ extends "../Motion.gd"
 export var AIR_ACCELERATION = 256
 export var MAX_AIR_SPEED = 120 # same speed as running
 
+export var double_jumps = 1
+var is_double_jumping = false
+
 func enter():
+	double_jumps = 1
+	is_double_jumping = false
 	owner.animationState.travel("jump")
 
 func update(delta):
 	var input_direction = get_input_direction()
-
-	if owner.velocity.y < 0:
-		owner.animationState.travel("jump")
-	elif owner.velocity.y >= 0:
-		owner.animationState.travel("fall")
+	
+	if !is_double_jumping:
+		if owner.velocity.y < 0:
+			owner.animationState.travel("jump")
+		elif owner.velocity.y >= 0:
+			owner.animationState.travel("fall")
 	
 	if input_direction.x != 0:
 		owner._set_direction(input_direction)
@@ -32,5 +38,18 @@ func update(delta):
 	
 	if owner.is_on_floor():
 		emit_signal("finished", "previous")
+	elif owner.is_on_wall():
+		emit_signal("finished", "wall_slide")
 	elif Input.is_action_pressed("attack"):
 		emit_signal("finished", "air_attack")
+	elif double_jumps > 0 && Input.is_action_just_pressed("jump"):
+		double_jumps -= 1
+		is_double_jumping = true
+		owner.velocity.y = -owner.JUMP_FORCE * delta
+		owner.animationState.travel("somersault")
+
+func _on_animation_finished(anim_name):
+	match anim_name:
+		"somersault":
+			is_double_jumping = false
+			owner.animationState.travel("fall")

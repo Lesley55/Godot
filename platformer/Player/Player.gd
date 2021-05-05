@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal screen_shake()
+
 export(float) var FRICTION = 10
 export(float) var AIR_RESISTANCE = 2
 export var GRAVITY = 400
@@ -28,6 +30,8 @@ func _physics_process(delta):
 		$StateMachine._change_state("knocked_down")
 	if Input.is_action_just_pressed("ui_page_down"):
 		$StateMachine._change_state("die")
+	if Input.is_action_just_pressed("ui_page_up"):
+		emit_signal("screen_shake")
 
 func _set_direction(direction):
 	# set attack knockback direction

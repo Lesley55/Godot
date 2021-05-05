@@ -5,9 +5,11 @@
 [node name="ChangeSceneButton" type="Button"]
 margin_right = 40.0
 margin_bottom = 20.0
+size_flags_vertical = 3
 text = "Play"
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="button_up" from="." to="." method="_on_button_up"]

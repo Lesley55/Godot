@@ -66,7 +66,6 @@ size_flags_vertical = 3
 margin_top = 101.0
 margin_right = 432.0
 margin_bottom = 198.0
-size_flags_vertical = 3
 text = "Main Screen"
 next_scene_path = "res://UI/TitleScreen.tscn"
 
@@ -74,4 +73,3 @@ next_scene_path = "res://UI/TitleScreen.tscn"
 margin_top = 202.0
 margin_right = 432.0
 margin_bottom = 299.0
-size_flags_vertical = 3

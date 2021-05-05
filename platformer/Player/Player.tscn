@@ -1001,95 +1001,76 @@ animation = "attack2"
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "attack3"
 
-[sub_resource type="AnimationNodeAnimation" id=131]
+[sub_resource type="AnimationNodeAnimation" id=56]
 animation = "corner_climb"
 
-[sub_resource type="AnimationNodeAnimation" id=132]
+[sub_resource type="AnimationNodeAnimation" id=57]
 animation = "corner_grab"
 
-[sub_resource type="AnimationNodeAnimation" id=133]
+[sub_resource type="AnimationNodeAnimation" id=58]
 animation = "corner_jump"
 
-[sub_resource type="AnimationNodeAnimation" id=56]
+[sub_resource type="AnimationNodeAnimation" id=59]
 animation = "crouch_idle"
 
-[sub_resource type="AnimationNodeAnimation" id=57]
+[sub_resource type="AnimationNodeAnimation" id=60]
 animation = "crouch_walk"
 
-[sub_resource type="AnimationNodeAnimation" id=58]
+[sub_resource type="AnimationNodeAnimation" id=61]
 animation = "die"
 
-[sub_resource type="AnimationNodeAnimation" id=59]
+[sub_resource type="AnimationNodeAnimation" id=62]
 animation = "fall"
 
-[sub_resource type="AnimationNodeAnimation" id=60]
+[sub_resource type="AnimationNodeAnimation" id=63]
 animation = "get_up"
 
-[sub_resource type="AnimationNodeAnimation" id=61]
+[sub_resource type="AnimationNodeAnimation" id=64]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=62]
+[sub_resource type="AnimationNodeAnimation" id=65]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=63]
+[sub_resource type="AnimationNodeAnimation" id=66]
 animation = "knock_down"
 
-[sub_resource type="AnimationNodeAnimation" id=134]
+[sub_resource type="AnimationNodeAnimation" id=67]
 animation = "ladder_climb"
 
-[sub_resource type="AnimationNodeAnimation" id=64]
+[sub_resource type="AnimationNodeAnimation" id=68]
 animation = "run"
 
-[sub_resource type="AnimationNodeAnimation" id=65]
+[sub_resource type="AnimationNodeAnimation" id=69]
 animation = "slide"
 
-[sub_resource type="AnimationNodeAnimation" id=111]
+[sub_resource type="AnimationNodeAnimation" id=70]
 animation = "somersault"
 
-[sub_resource type="AnimationNodeAnimation" id=66]
+[sub_resource type="AnimationNodeAnimation" id=71]
 animation = "stand"
 
-[sub_resource type="AnimationNodeAnimation" id=115]
+[sub_resource type="AnimationNodeAnimation" id=72]
 animation = "walk"
 
-[sub_resource type="AnimationNodeAnimation" id=135]
+[sub_resource type="AnimationNodeAnimation" id=73]
 animation = "wall_run"
 
-[sub_resource type="AnimationNodeAnimation" id=116]
+[sub_resource type="AnimationNodeAnimation" id=74]
 animation = "wall_slide"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=68]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=69]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=70]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=71]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=72]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=73]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=74]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=75]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=76]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=77]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=78]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=79]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=80]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=81]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=82]
 
@@ -1099,25 +1080,23 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=84]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=86]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=87]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=88]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=89]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=90]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=91]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=92]
 switch_mode = 2
@@ -1129,29 +1108,58 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=95]
 switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=96]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=97]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=98]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=103]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=104]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=105]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=106]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=107]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=108]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=109]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=110]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=111]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=112]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=113]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=114]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=115]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=116]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=117]
 
@@ -1179,15 +1187,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=129]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=130]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=136]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=137]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=138]
-
-[sub_resource type="AnimationNodeStateMachine" id=107]
+[sub_resource type="AnimationNodeStateMachine" id=130]
 states/air_attack1/node = SubResource( 48 )
 states/air_attack1/position = Vector2( 194, 664 )
 states/air_attack2/node = SubResource( 49 )
@@ -1204,56 +1204,56 @@ states/attack2/node = SubResource( 54 )
 states/attack2/position = Vector2( 194, 171 )
 states/attack3/node = SubResource( 55 )
 states/attack3/position = Vector2( 194, 250 )
-states/corner_climb/node = SubResource( 131 )
+states/corner_climb/node = SubResource( 56 )
 states/corner_climb/position = Vector2( 1276, 664 )
-states/corner_grab/node = SubResource( 132 )
+states/corner_grab/node = SubResource( 57 )
 states/corner_grab/position = Vector2( 1072, 664 )
-states/corner_jump/node = SubResource( 133 )
-states/corner_jump/position = Vector2( 408, 426 )
-states/crouch_idle/node = SubResource( 56 )
+states/corner_jump/node = SubResource( 58 )
+states/corner_jump/position = Vector2( 407, 426 )
+states/crouch_idle/node = SubResource( 59 )
 states/crouch_idle/position = Vector2( 194, -75 )
-states/crouch_walk/node = SubResource( 57 )
+states/crouch_walk/node = SubResource( 60 )
 states/crouch_walk/position = Vector2( 194, -157 )
-states/die/node = SubResource( 58 )
+states/die/node = SubResource( 61 )
 states/die/position = Vector2( 194, 16 )
-states/fall/node = SubResource( 59 )
+states/fall/node = SubResource( 62 )
 states/fall/position = Vector2( 868, 503 )
-states/get_up/node = SubResource( 60 )
+states/get_up/node = SubResource( 63 )
 states/get_up/position = Vector2( 684, -157 )
-states/idle/node = SubResource( 61 )
+states/idle/node = SubResource( 64 )
 states/idle/position = Vector2( 515, 95 )
-states/jump/node = SubResource( 62 )
+states/jump/node = SubResource( 65 )
 states/jump/position = Vector2( 515, 503 )
-states/knock_down/node = SubResource( 63 )
+states/knock_down/node = SubResource( 66 )
 states/knock_down/position = Vector2( 868, -157 )
-states/ladder_climb/node = SubResource( 134 )
+states/ladder_climb/node = SubResource( 67 )
 states/ladder_climb/position = Vector2( 868, 747 )
-states/run/node = SubResource( 64 )
+states/run/node = SubResource( 68 )
 states/run/position = Vector2( 868, 95 )
-states/slide/node = SubResource( 65 )
+states/slide/node = SubResource( 69 )
 states/slide/position = Vector2( 515, -157 )
-states/somersault/node = SubResource( 111 )
+states/somersault/node = SubResource( 70 )
 states/somersault/position = Vector2( 515, 664 )
-states/stand/node = SubResource( 66 )
+states/stand/node = SubResource( 71 )
 states/stand/position = Vector2( 515, -75 )
-states/walk/node = SubResource( 115 )
+states/walk/node = SubResource( 72 )
 states/walk/position = Vector2( 684, 46 )
-states/wall_run/node = SubResource( 135 )
+states/wall_run/node = SubResource( 73 )
 states/wall_run/position = Vector2( 1369, 787 )
-states/wall_slide/node = SubResource( 116 )
+states/wall_slide/node = SubResource( 74 )
 states/wall_slide/position = Vector2( 868, 664 )
-transitions = [ "idle", "run", SubResource( 68 ), "run", "idle", SubResource( 69 ), "idle", "jump", SubResource( 70 ), "run", "jump", SubResource( 71 ), "jump", "fall", SubResource( 72 ), "fall", "idle", SubResource( 73 ), "fall", "run", SubResource( 74 ), "idle", "attack1", SubResource( 75 ), "attack1", "idle", SubResource( 76 ), "idle", "fall", SubResource( 77 ), "run", "fall", SubResource( 78 ), "attack1", "attack2", SubResource( 79 ), "attack2", "attack3", SubResource( 80 ), "attack3", "idle", SubResource( 81 ), "slide", "stand", SubResource( 82 ), "attack2", "idle", SubResource( 83 ), "run", "slide", SubResource( 84 ), "stand", "idle", SubResource( 85 ), "run", "knock_down", SubResource( 86 ), "idle", "knock_down", SubResource( 87 ), "knock_down", "get_up", SubResource( 88 ), "get_up", "idle", SubResource( 89 ), "air_attack1", "air_attack2", SubResource( 90 ), "air_attack2", "air_attack3_ready", SubResource( 91 ), "air_attack3_ready", "air_attack3_loop", SubResource( 92 ), "air_attack3_loop", "air_attack3_end", SubResource( 93 ), "jump", "air_attack1", SubResource( 94 ), "air_attack3_end", "idle", SubResource( 95 ), "air_attack2", "fall", SubResource( 96 ), "air_attack1", "fall", SubResource( 97 ), "idle", "die", SubResource( 98 ), "crouch_walk", "crouch_idle", SubResource( 103 ), "crouch_idle", "crouch_walk", SubResource( 104 ), "crouch_idle", "idle", SubResource( 105 ), "idle", "crouch_idle", SubResource( 106 ), "jump", "somersault", SubResource( 112 ), "fall", "somersault", SubResource( 113 ), "somersault", "fall", SubResource( 114 ), "idle", "walk", SubResource( 117 ), "walk", "run", SubResource( 118 ), "run", "walk", SubResource( 119 ), "walk", "idle", SubResource( 120 ), "walk", "knock_down", SubResource( 121 ), "walk", "crouch_walk", SubResource( 122 ), "walk", "jump", SubResource( 123 ), "walk", "fall", SubResource( 124 ), "fall", "walk", SubResource( 125 ), "fall", "wall_slide", SubResource( 126 ), "jump", "wall_slide", SubResource( 127 ), "wall_slide", "jump", SubResource( 128 ), "wall_slide", "fall", SubResource( 129 ), "wall_slide", "idle", SubResource( 130 ), "corner_grab", "corner_climb", SubResource( 136 ), "jump", "corner_jump", SubResource( 137 ), "corner_jump", "jump", SubResource( 138 ) ]
+transitions = [ "idle", "run", SubResource( 75 ), "run", "idle", SubResource( 76 ), "idle", "jump", SubResource( 77 ), "run", "jump", SubResource( 78 ), "jump", "fall", SubResource( 79 ), "fall", "idle", SubResource( 80 ), "fall", "run", SubResource( 81 ), "idle", "attack1", SubResource( 82 ), "attack1", "idle", SubResource( 83 ), "idle", "fall", SubResource( 84 ), "run", "fall", SubResource( 85 ), "attack1", "attack2", SubResource( 86 ), "attack2", "attack3", SubResource( 87 ), "attack3", "idle", SubResource( 88 ), "slide", "stand", SubResource( 89 ), "attack2", "idle", SubResource( 90 ), "run", "slide", SubResource( 91 ), "stand", "idle", SubResource( 92 ), "run", "knock_down", SubResource( 93 ), "idle", "knock_down", SubResource( 94 ), "knock_down", "get_up", SubResource( 95 ), "get_up", "idle", SubResource( 96 ), "air_attack1", "air_attack2", SubResource( 97 ), "air_attack2", "air_attack3_ready", SubResource( 98 ), "air_attack3_ready", "air_attack3_loop", SubResource( 99 ), "air_attack3_loop", "air_attack3_end", SubResource( 100 ), "jump", "air_attack1", SubResource( 101 ), "air_attack3_end", "idle", SubResource( 102 ), "air_attack2", "fall", SubResource( 103 ), "air_attack1", "fall", SubResource( 104 ), "idle", "die", SubResource( 105 ), "crouch_walk", "crouch_idle", SubResource( 106 ), "crouch_idle", "crouch_walk", SubResource( 107 ), "crouch_idle", "idle", SubResource( 108 ), "idle", "crouch_idle", SubResource( 109 ), "jump", "somersault", SubResource( 110 ), "fall", "somersault", SubResource( 111 ), "somersault", "fall", SubResource( 112 ), "idle", "walk", SubResource( 113 ), "walk", "run", SubResource( 114 ), "run", "walk", SubResource( 115 ), "walk", "idle", SubResource( 116 ), "walk", "knock_down", SubResource( 117 ), "walk", "crouch_walk", SubResource( 118 ), "walk", "jump", SubResource( 119 ), "walk", "fall", SubResource( 120 ), "fall", "walk", SubResource( 121 ), "fall", "wall_slide", SubResource( 122 ), "jump", "wall_slide", SubResource( 123 ), "wall_slide", "jump", SubResource( 124 ), "wall_slide", "fall", SubResource( 125 ), "wall_slide", "idle", SubResource( 126 ), "corner_grab", "corner_climb", SubResource( 127 ), "jump", "corner_jump", SubResource( 128 ), "corner_jump", "jump", SubResource( 129 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( 182, 292 )
+graph_offset = Vector2( 73, -209 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=108]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=131]
 
-[sub_resource type="CapsuleShape2D" id=109]
+[sub_resource type="CapsuleShape2D" id=132]
 radius = 5.24329
 height = 9.02508
 
-[sub_resource type="RectangleShape2D" id=110]
+[sub_resource type="RectangleShape2D" id=133]
 extents = Vector2( 3.43022, 1.18831 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -1355,9 +1355,9 @@ anims/wall_run = SubResource( 46 )
 anims/wall_slide = SubResource( 47 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 107 )
+tree_root = SubResource( 130 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 108 )
+parameters/playback = SubResource( 131 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 
@@ -1367,7 +1367,7 @@ script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
 position = Vector2( 9.07165, 2.18515 )
-shape = SubResource( 109 )
+shape = SubResource( 132 )
 disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -1376,7 +1376,7 @@ collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, 11.061 )
-shape = SubResource( 110 )
+shape = SubResource( 133 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/adventurer.png" type="Texture" id=2]
@@ -1183,6 +1183,10 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=136]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=137]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=138]
+
 [sub_resource type="AnimationNodeStateMachine" id=107]
 states/air_attack1/node = SubResource( 48 )
 states/air_attack1/position = Vector2( 194, 664 )
@@ -1205,7 +1209,7 @@ states/corner_climb/position = Vector2( 1276, 664 )
 states/corner_grab/node = SubResource( 132 )
 states/corner_grab/position = Vector2( 1072, 664 )
 states/corner_jump/node = SubResource( 133 )
-states/corner_jump/position = Vector2( 1072, 736 )
+states/corner_jump/position = Vector2( 408, 426 )
 states/crouch_idle/node = SubResource( 56 )
 states/crouch_idle/position = Vector2( 194, -75 )
 states/crouch_walk/node = SubResource( 57 )
@@ -1238,10 +1242,10 @@ states/wall_run/node = SubResource( 135 )
 states/wall_run/position = Vector2( 1369, 787 )
 states/wall_slide/node = SubResource( 116 )
 states/wall_slide/position = Vector2( 868, 664 )
-transitions = [ "idle", "run", SubResource( 68 ), "run", "idle", SubResource( 69 ), "idle", "jump", SubResource( 70 ), "run", "jump", SubResource( 71 ), "jump", "fall", SubResource( 72 ), "fall", "idle", SubResource( 73 ), "fall", "run", SubResource( 74 ), "idle", "attack1", SubResource( 75 ), "attack1", "idle", SubResource( 76 ), "idle", "fall", SubResource( 77 ), "run", "fall", SubResource( 78 ), "attack1", "attack2", SubResource( 79 ), "attack2", "attack3", SubResource( 80 ), "attack3", "idle", SubResource( 81 ), "slide", "stand", SubResource( 82 ), "attack2", "idle", SubResource( 83 ), "run", "slide", SubResource( 84 ), "stand", "idle", SubResource( 85 ), "run", "knock_down", SubResource( 86 ), "idle", "knock_down", SubResource( 87 ), "knock_down", "get_up", SubResource( 88 ), "get_up", "idle", SubResource( 89 ), "air_attack1", "air_attack2", SubResource( 90 ), "air_attack2", "air_attack3_ready", SubResource( 91 ), "air_attack3_ready", "air_attack3_loop", SubResource( 92 ), "air_attack3_loop", "air_attack3_end", SubResource( 93 ), "jump", "air_attack1", SubResource( 94 ), "air_attack3_end", "idle", SubResource( 95 ), "air_attack2", "fall", SubResource( 96 ), "air_attack1", "fall", SubResource( 97 ), "idle", "die", SubResource( 98 ), "crouch_walk", "crouch_idle", SubResource( 103 ), "crouch_idle", "crouch_walk", SubResource( 104 ), "crouch_idle", "idle", SubResource( 105 ), "idle", "crouch_idle", SubResource( 106 ), "jump", "somersault", SubResource( 112 ), "fall", "somersault", SubResource( 113 ), "somersault", "fall", SubResource( 114 ), "idle", "walk", SubResource( 117 ), "walk", "run", SubResource( 118 ), "run", "walk", SubResource( 119 ), "walk", "idle", SubResource( 120 ), "walk", "knock_down", SubResource( 121 ), "walk", "crouch_walk", SubResource( 122 ), "walk", "jump", SubResource( 123 ), "walk", "fall", SubResource( 124 ), "fall", "walk", SubResource( 125 ), "fall", "wall_slide", SubResource( 126 ), "jump", "wall_slide", SubResource( 127 ), "wall_slide", "jump", SubResource( 128 ), "wall_slide", "fall", SubResource( 129 ), "wall_slide", "idle", SubResource( 130 ), "corner_grab", "corner_climb", SubResource( 136 ) ]
+transitions = [ "idle", "run", SubResource( 68 ), "run", "idle", SubResource( 69 ), "idle", "jump", SubResource( 70 ), "run", "jump", SubResource( 71 ), "jump", "fall", SubResource( 72 ), "fall", "idle", SubResource( 73 ), "fall", "run", SubResource( 74 ), "idle", "attack1", SubResource( 75 ), "attack1", "idle", SubResource( 76 ), "idle", "fall", SubResource( 77 ), "run", "fall", SubResource( 78 ), "attack1", "attack2", SubResource( 79 ), "attack2", "attack3", SubResource( 80 ), "attack3", "idle", SubResource( 81 ), "slide", "stand", SubResource( 82 ), "attack2", "idle", SubResource( 83 ), "run", "slide", SubResource( 84 ), "stand", "idle", SubResource( 85 ), "run", "knock_down", SubResource( 86 ), "idle", "knock_down", SubResource( 87 ), "knock_down", "get_up", SubResource( 88 ), "get_up", "idle", SubResource( 89 ), "air_attack1", "air_attack2", SubResource( 90 ), "air_attack2", "air_attack3_ready", SubResource( 91 ), "air_attack3_ready", "air_attack3_loop", SubResource( 92 ), "air_attack3_loop", "air_attack3_end", SubResource( 93 ), "jump", "air_attack1", SubResource( 94 ), "air_attack3_end", "idle", SubResource( 95 ), "air_attack2", "fall", SubResource( 96 ), "air_attack1", "fall", SubResource( 97 ), "idle", "die", SubResource( 98 ), "crouch_walk", "crouch_idle", SubResource( 103 ), "crouch_idle", "crouch_walk", SubResource( 104 ), "crouch_idle", "idle", SubResource( 105 ), "idle", "crouch_idle", SubResource( 106 ), "jump", "somersault", SubResource( 112 ), "fall", "somersault", SubResource( 113 ), "somersault", "fall", SubResource( 114 ), "idle", "walk", SubResource( 117 ), "walk", "run", SubResource( 118 ), "run", "walk", SubResource( 119 ), "walk", "idle", SubResource( 120 ), "walk", "knock_down", SubResource( 121 ), "walk", "crouch_walk", SubResource( 122 ), "walk", "jump", SubResource( 123 ), "walk", "fall", SubResource( 124 ), "fall", "walk", SubResource( 125 ), "fall", "wall_slide", SubResource( 126 ), "jump", "wall_slide", SubResource( 127 ), "wall_slide", "jump", SubResource( 128 ), "wall_slide", "fall", SubResource( 129 ), "wall_slide", "idle", SubResource( 130 ), "corner_grab", "corner_climb", SubResource( 136 ), "jump", "corner_jump", SubResource( 137 ), "corner_jump", "jump", SubResource( 138 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( 214, 229 )
+graph_offset = Vector2( 182, 292 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=108]
 

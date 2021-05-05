@@ -9,14 +9,14 @@ var is_double_jumping = false
 func enter():
 	double_jumps = 1
 	is_double_jumping = false
-	owner.animationState.travel("jump")
+	owner.animationState.travel("corner_jump")
 
 func update(delta):
 	var input_direction = get_input_direction()
 	
 	if !is_double_jumping:
 		if owner.velocity.y < 0:
-			owner.animationState.travel("jump")
+			owner.animationState.travel("corner_jump")
 		elif owner.velocity.y >= 0:
 			owner.animationState.travel("fall")
 	

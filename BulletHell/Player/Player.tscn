@@ -104,4 +104,5 @@ position = Vector2( -54, 5 )
 position = Vector2( 54, 5 )
 
 [node name="LowHealthPulseSound" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

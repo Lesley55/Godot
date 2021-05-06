@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dragon.png-867800763b204b1888d70668e33b3465.stex"
+path="res://.import/Minotaur.png-495f621a6528188751e2db33916a89ee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/dragon.png"
-dest_files=[ "res://.import/dragon.png-867800763b204b1888d70668e33b3465.stex" ]
+source_file="res://Enemies/Minotaur/Minotaur.png"
+dest_files=[ "res://.import/Minotaur.png-495f621a6528188751e2db33916a89ee.stex" ]
 
 [params]
 

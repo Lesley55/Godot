@@ -23,7 +23,7 @@ func _ready():
 	$StateMachine.initialize($StateMachine.START_STATE)
 
 func _physics_process(delta):
-#	tests
+#	# tests
 	if Input.is_action_just_pressed("ui_home"):
 		SceneChanger.change_scene("res://Levels/Level1.tscn")
 	if Input.is_action_just_pressed("ui_end"):
@@ -45,11 +45,15 @@ func _set_direction(direction):
 		hitboxPivot.rotation_degrees = 0
 
 
-func take_damage(attacker, amount, effect=null):
-	if self.is_a_parent_of(attacker):
-		return
-	$States/Stagger.knockback_direction = (attacker.global_position - global_position).normalized()
-	$Health.take_damage(amount, effect)
+func hit(amount):
+	PlayerData.health -= amount
+
+
+#func take_damage(attacker, amount, effect=null):
+#	if self.is_a_parent_of(attacker):
+#		return
+#	$States/Stagger.knockback_direction = (attacker.global_position - global_position).normalized()
+#	$Health.take_damage(amount, effect)
 
 func set_dead(value):
 	set_process_input(not value)

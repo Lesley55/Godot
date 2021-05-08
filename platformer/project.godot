@@ -112,6 +112,8 @@ run={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
+2d_physics/layer_3="HurtboxPlayer"
+2d_physics/layer_4="HurtboxEnemies"
 2d_physics/layer_5="Enemies"
 2d_physics/layer_10="Drop_thru"
 

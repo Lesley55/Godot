@@ -9,8 +9,8 @@ onready var camera = get_parent()
 # amplitude = amount of pixels the screen can shake to both sides
 func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
 	if priority >= self.priority:
-		self.priority = priority
 		self.amplitude = amplitude
+		self.priority = priority
 		
 		$Duration.wait_time = duration
 		$Frequency.wait_time = 1 / float(frequency)

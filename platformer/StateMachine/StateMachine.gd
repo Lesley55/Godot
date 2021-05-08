@@ -61,4 +61,4 @@ func _change_state(state_name):
 	var s = []
 	for state in states_stack:
 		s.push_front(state.name)
-	print(s)
+	print(String(owner.name) + " " + String(s))

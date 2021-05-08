@@ -11,7 +11,7 @@ func update(delta):
 	var input_direction = get_input_direction()
 	
 	# direction, keep pressure on the wall for is_on_wall()
-	owner.velocity.x += input_direction.x
+	owner.velocity.x += input_direction.x * 10
 	
 	# accelerate / slide
 	owner.velocity.y += WALL_SLIDE_ACCELERATION * delta

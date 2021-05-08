@@ -1,6 +1,7 @@
 extends Node
 
 signal score_updated
+signal no_health
 signal player_died
 signal health_updated
 signal max_health_updated
@@ -26,7 +27,8 @@ func set_deaths(value: int):
 func set_health(value):
 	health = value
 	if health <= 0:
-		self.deaths -= 1
+#		self.deaths -= 1
+		emit_signal("no_health")
 	if health > max_health:
 		health = max_health
 	emit_signal("health_updated", health)

@@ -1,10 +1,10 @@
 extends Node
 
 signal score_updated
-signal no_health
-signal player_died
 signal health_updated
 signal max_health_updated
+signal no_health
+signal player_died
 
 export(int) var max_health = 1 setget set_max_health
 onready var health = max_health setget set_health
@@ -31,7 +31,9 @@ func set_health(value):
 		emit_signal("no_health")
 	if health > max_health:
 		health = max_health
-	emit_signal("health_updated", health)
+		
+	var h = health * 0.88 + max_health * 0.09 # correction for missing/transparent pixels in healthbar texture
+	emit_signal("health_updated", h)
 
 func set_max_health(value):
 	max_health = value

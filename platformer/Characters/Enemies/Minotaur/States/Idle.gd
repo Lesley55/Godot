@@ -1,6 +1,6 @@
 extends "res://StateMachine/State.gd"
 
-export(float) var IDLE_TIME = 1
+export(float) var IDLE_TIME = 1.5
 
 func enter():
 	owner.animationState.travel("idle")

@@ -1,9 +1,8 @@
-[gd_scene load_steps=151 format=2]
+[gd_scene load_steps=150 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/adventurer.png" type="Texture" id=2]
 [ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player/SwordHitbox.gd" type="Script" id=4]
 [ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=5]
 [ext_resource path="res://Player/States/Motion/Ground/Idle.gd" type="Script" id=6]
 [ext_resource path="res://Player/States/Combat/Die.gd" type="Script" id=7]
@@ -1832,11 +1831,11 @@ graph_offset = Vector2( 73, -209 )
 radius = 9.92783
 height = 4.31019
 
-[sub_resource type="CapsuleShape2D" id=134]
+[sub_resource type="CapsuleShape2D" id=133]
 radius = 5.24552
 height = 10.315
 
-[sub_resource type="RectangleShape2D" id=133]
+[sub_resource type="RectangleShape2D" id=134]
 extents = Vector2( 3.43022, 1.18831 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -1946,7 +1945,6 @@ parameters/playback = SubResource( 131 )
 [node name="SwordHitbox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -1.32283 )
 collision_mask = 8
-script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="SwordHitbox" index="0"]
 position = Vector2( 6.59134, 1.19209e-07 )
@@ -1958,7 +1956,7 @@ collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, 2.16272 )
-shape = SubResource( 134 )
+shape = SubResource( 133 )
 
 [node name="DropThruCheck" type="Area2D" parent="."]
 collision_layer = 0
@@ -1966,7 +1964,7 @@ collision_mask = 512
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropThruCheck"]
 position = Vector2( 0, 11.061 )
-shape = SubResource( 133 )
+shape = SubResource( 134 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

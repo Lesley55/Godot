@@ -2,6 +2,7 @@ extends "res://StateMachine/State.gd"
 
 export var ACCELERATION = 512
 export var MAX_SPEED = 80
+var should_attack = false
 
 func enter():
 	owner.animationState.travel("walk")
@@ -26,3 +27,12 @@ func update(delta):
 	owner.velocity.y += owner.GRAVITY * delta
 	
 	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
+	
+	if should_attack:
+		emit_signal("finished", "attack")
+
+func _on_AttackDetection_body_entered(_body):
+	should_attack = true
+
+func _on_AttackDetection_body_exited(_body):
+	should_attack = false

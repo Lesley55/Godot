@@ -17,6 +17,11 @@ func update(delta):
 		# accelerate / move
 		owner.velocity.x += direction * ACCELERATION * delta
 		owner.velocity.x = clamp(owner.velocity.x, -MAX_SPEED, MAX_SPEED)
+		
+		if owner.is_on_wall() || !owner.checkFloor.is_colliding():
+			direction *= -1
+			owner.checkFloor.position.x *= -1
+			owner.velocity.x = 0
 	
 	# apply gravity
 	owner.velocity.y += owner.GRAVITY * delta
@@ -26,6 +31,7 @@ func update(delta):
 	if owner.playerDetectionZone.can_see_player():
 		emit_signal("finished", "stamp")
 	elif owner.timer.is_stopped():
-		# temporary change direction, needs to be replaced
-		direction *= -1
+		if randi() % 2 == 0:
+			direction *= -1
+			owner.checkFloor.position.x *= -1
 		emit_signal("finished", "idle")

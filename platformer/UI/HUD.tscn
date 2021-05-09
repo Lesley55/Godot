@@ -23,6 +23,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 196.0
 margin_bottom = 59.0
+rect_scale = Vector2( 2, 2 )
 will_pulse = true
 
 [node name="Score" type="Label" parent="."]

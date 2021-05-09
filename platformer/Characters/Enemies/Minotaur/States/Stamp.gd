@@ -3,6 +3,7 @@ extends "res://StateMachine/State.gd"
 export var STAMPS = 2
 
 func enter():
+	STAMPS = 2
 	owner.animationState.travel("stamp")
 
 func update(delta):

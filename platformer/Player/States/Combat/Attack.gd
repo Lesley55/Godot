@@ -4,6 +4,9 @@ func enter():
 	owner.animationState.travel("attack1")
 
 func update(delta):
+	# apply gravity
+	owner.velocity.y += owner.GRAVITY * delta
+	
 	# apply friction
 	owner.velocity.x = lerp(owner.velocity.x, 0, owner.FRICTION * delta)
 	

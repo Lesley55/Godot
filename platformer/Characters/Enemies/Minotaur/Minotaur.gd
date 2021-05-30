@@ -47,5 +47,5 @@ func _on_Hurtbox_area_entered(area):
 func _on_Stats_no_health():
 	stateMachine._change_state("die")
 	stateMachine.set_active(false)
-	yield(get_tree().create_timer(2), "timeout")
+	yield(get_tree().create_timer(3), "timeout")
 	queue_free()

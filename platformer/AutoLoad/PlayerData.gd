@@ -11,6 +11,7 @@ onready var health = max_health setget set_health
 
 var score = 0 setget set_score
 var deaths = 0 setget set_deaths
+var checkpoint = null
 
 func reset():
 	health = max_health
@@ -23,6 +24,14 @@ func set_score(value: int):
 func set_deaths(value: int):
 	deaths = value
 	emit_signal("player_died")
+	
+	# bad code and maybe needs to go somewhere else
+	yield(get_tree().create_timer(2.5), "timeout")
+	get_tree().reload_current_scene()
+	if checkpoint != null:
+		yield(get_tree().create_timer(0.1), "timeout")
+		get_tree().current_scene.get_node("Player").position = checkpoint
+	get_tree().paused = false
 
 func set_health(value):
 	health = value

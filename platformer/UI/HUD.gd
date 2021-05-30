@@ -21,7 +21,12 @@ func _ready():
 
 func _on_PlayerData_player_died():
 	label.text = DIED_MESSAGE
-	self.paused = true
+#	yield(get_tree().create_timer(3), "timeout")
+#	self.paused = true
+
+	yield(get_tree().create_timer(2.1), "timeout")
+	get_tree().paused = true
+	
 	PlayerData.reset() # needs to go somewhere else
 
 func _unhandled_input(event):

@@ -3,7 +3,7 @@ extends "res://StateMachine/State.gd"
 var attack = 0
 
 func enter():
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(get_tree().create_timer(0.6), "timeout")
 	var a = attack % 3
 	if a == 0:
 		owner.animationState.travel("attack1")

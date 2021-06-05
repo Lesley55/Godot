@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://UI/ChangeSceneButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/SaveButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/RetryButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/QuitButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://UI/HUD.gd" type="Script" id=5]
+[ext_resource path="res://Themes/theme.tres" type="Theme" id=6]
+[ext_resource path="res://UI/Title.tscn" type="PackedScene" id=7]
+[ext_resource path="res://UI/LoadButton.tscn" type="PackedScene" id=8]
+
+[node name="HUD" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 6 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" parent="." instance=ExtResource( 2 )]
+margin_right = 76.0
+
+[node name="LoadButton" parent="." instance=ExtResource( 8 )]
+margin_left = 0.0
+margin_top = 26.0
+margin_right = 76.0
+margin_bottom = 50.0
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 0.374573
+margin_bottom = 0.374573
+color = Color( 0, 0, 0, 0.235294 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" parent="PauseOverlay" instance=ExtResource( 7 )]
+margin_left = -47.0
+margin_top = -244.8
+margin_right = 47.0
+margin_bottom = -215.8
+text = "Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -216.0
+margin_top = -149.0
+margin_right = 216.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryButton" parent="PauseOverlay/VBoxContainer" instance=ExtResource( 3 )]
+margin_right = 432.0
+margin_bottom = 97.0
+size_flags_vertical = 3
+
+[node name="ChangeSceneButton" parent="PauseOverlay/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 101.0
+margin_right = 432.0
+margin_bottom = 198.0
+text = "Main Screen"
+next_scene_path = "res://UI/TitleScreen.tscn"
+
+[node name="QuitButton" parent="PauseOverlay/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 202.0
+margin_right = 432.0
+margin_bottom = 299.0

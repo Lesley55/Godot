@@ -1,8 +1,6 @@
 extends Control
 
 onready var scene_tree = get_tree()
-onready var health_bar = $HealthBar
-onready var score = $Score
 onready var pause_overlay = $PauseOverlay
 onready var label = $PauseOverlay/Title
 

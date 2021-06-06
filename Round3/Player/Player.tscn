@@ -1,7 +1,12 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Player/golem.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Player/PlayerStateMachine.gd" type="Script" id=3]
+[ext_resource path="res://Player/States/Motion/Idle.gd" type="Script" id=4]
+[ext_resource path="res://Player/States/Motion/Move.gd" type="Script" id=5]
+[ext_resource path="res://Player/States/Combat/Die.gd" type="Script" id=6]
+[ext_resource path="res://Player/States/Combat/Attack.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.13109
@@ -196,18 +201,33 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
 [sub_resource type="AnimationNodeStateMachine" id=22]
-states/Idle/node = SubResource( 14 )
-states/Idle/position = Vector2( 374, 85 )
-states/Walk/node = SubResource( 19 )
-states/Walk/position = Vector2( 630, 85 )
-transitions = [ "Idle", "Walk", SubResource( 20 ), "Walk", "Idle", SubResource( 21 ) ]
-start_node = "Idle"
+states/idle/node = SubResource( 14 )
+states/idle/position = Vector2( 374, 85 )
+states/walk/node = SubResource( 19 )
+states/walk/position = Vector2( 630, 85 )
+transitions = [ "idle", "walk", SubResource( 20 ), "walk", "idle", SubResource( 21 ) ]
+start_node = "idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
-MAX_SPEED = 700
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+START_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -234,7 +254,7 @@ anims/walk_up = SubResource( 9 )
 tree_root = SubResource( 22 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 23 )
-parameters/Idle/blend_position = Vector2( 0, 0 )
-parameters/Walk/blend_position = Vector2( -0.0626487, 0.218143 )
+parameters/idle/blend_position = Vector2( -0.22381, 0.426724 )
+parameters/walk/blend_position = Vector2( -0.192064, 0.265517 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]

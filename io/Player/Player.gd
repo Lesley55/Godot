@@ -13,13 +13,16 @@ func _process(delta):
 	mesh.scale.y = lerp(mesh.scale.y, size, 0.1)
 	
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector = global_position - get_global_mouse_position()
+	input_vector *= -1 # inverted
+#	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+#	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
+#	removing teleportation when mouse in player
 	position += input_vector * speed
 	
-	camera.zoom.x = lerp(camera.zoom.x, zoom, 0.1)
-	camera.zoom.y = lerp(camera.zoom.y, zoom, 0.1)
+	camera.zoom.x = lerp(camera.zoom.x, zoom, 0.05)
+	camera.zoom.y = lerp(camera.zoom.y, zoom, 0.05)
 	if Input.is_action_pressed("ui_accept"):
 		camera.zoom = Vector2(10, 10)
 	

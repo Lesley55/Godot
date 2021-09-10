@@ -240,4 +240,5 @@ position = Vector2( 16.4469, 39.4061 )
 position = Vector2( 120.015, 99.0177 )
 
 [node name="mob_timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="mob_timer" to="." method="_on_mob_timer_timeout"]

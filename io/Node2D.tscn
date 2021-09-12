@@ -20,4 +20,4 @@ region_rect = Rect2( 80, 40, 10000, 10000 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( -10000, -10000, -10000, 10000, 10000, 10000, 10000, -10000, -10000, -10000, -10100, -10100, 10100, -10100, 10100, 10100, -10100, 10100, -10100, -10100 )
+polygon = PoolVector2Array( -5000, -5000, -5000, 5000, 5000, 5000, 5000, -5000, -5000, -5000, -10100, -10100, 10100, -10100, 10100, 10100, -10100, 10100, -10100, -10100 )

@@ -16,6 +16,7 @@ __meta__ = {
 }
 
 [node name="Background" type="TextureRect" parent="TitleScreen"]
+modulate = Color( 0.541176, 0.541176, 0.541176, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -377.0
@@ -33,11 +34,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -417.0
-margin_top = -213.0
-margin_right = 81.0
-margin_bottom = 213.0
+margin_left = -413.0
+margin_top = -209.0
+margin_right = 85.0
+margin_bottom = 217.0
 alignment = 1
+color = Color( 0, 0, 1, 1 )
 edit_alpha = false
 presets_enabled = false
 presets_visible = false
@@ -64,7 +66,7 @@ margin_bottom = 93.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 align = 1
-max_length = 16
+max_length = 14
 placeholder_text = "Name"
 __meta__ = {
 "_edit_use_anchors_": false

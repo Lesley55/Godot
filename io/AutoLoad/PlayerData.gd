@@ -13,8 +13,8 @@ func reset():
 	score = 0
 
 func set_name(value: String):
-	value.strip_escapes() # remove unwanted escape characters
-	value.strip_edges() # trim white spaces / unprintable
+	value = value.strip_escapes() # remove unwanted escape characters
+	value = value.strip_edges() # trim white spaces / unprintable
 	if !value.empty() and value != " ":
 		playerName = value
 

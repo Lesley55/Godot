@@ -1,5 +1,7 @@
 extends Node2D
 
+signal screen_shake()
+
 var size = 1.0
 var zoom = 1.0
 var speed = 5
@@ -25,6 +27,7 @@ func _process(delta):
 		size *= 0.99995 # todo replace by changing score
 	# test
 	if Input.is_action_just_pressed("ui_home"):
+		emit_signal("screen_shake")
 		queue_free()
 		PlayerData.die()
 

@@ -1,6 +1,7 @@
 extends Node
 
 signal score_updated
+signal player_died
 
 var color = Color8(0,0,255,255) # blauw
 var playerName = "name" setget set_name
@@ -22,3 +23,6 @@ func set_score(value: int):
 	if score < 0:
 		score = 0
 	emit_signal("score_updated")
+
+func die():
+	emit_signal("player_died")

@@ -1,6 +1,6 @@
 extends Area2D
 
-var size = 1
+var size = 0.2
 
 onready var mesh = $MeshInstance2D
 onready var collisionShape = $CollisionShape2D
@@ -13,4 +13,5 @@ func _ready():
 	mesh.modulate = Color8(rand_range(0,255), rand_range(0,255), rand_range(0,255), 255)
 
 func eat():
+	PlayerData.score += size
 	queue_free()

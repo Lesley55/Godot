@@ -1,7 +1,7 @@
 extends "res://StateMachine/State.gd"
 
 func enter():
-	pass
+	return
 
 func update(delta):
 	return

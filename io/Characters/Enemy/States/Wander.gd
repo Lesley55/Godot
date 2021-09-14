@@ -3,10 +3,10 @@ extends "res://StateMachine/State.gd"
 var direction = 1
 
 func enter():
-	pass
+	return
 
 func update(delta):
-	pass
+	return
 #	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
 #	
 #	if owner.playerDetectionZone.can_see_player():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Foodspawner.gd" type="Script" id=2]
 [ext_resource path="res://Assets/background.jpg" type="Texture" id=3]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Characters/Enemy/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/ScreenShake.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -39,3 +40,14 @@ position = Vector2( -74.5814, -251.325 )
 
 [node name="Enemy4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 86.457, -253.444 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 10, 10 )
+smoothing_enabled = true
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
+
+[node name="ScreenShake" parent="Camera2D" instance=ExtResource( 6 )]

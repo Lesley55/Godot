@@ -2,6 +2,7 @@ extends Node2D
 
 var FOOD = preload("res://Food/Food.tscn")
 var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
+var PLAYER = preload("res://Characters/Player/Player.tscn")
 
 var size = 1000
 
@@ -12,6 +13,8 @@ func _ready():
 	var width = bg.region_rect.size.x
 	var height = bg.region_rect.size.y
 	size = width * height
+	
+	spawn(PLAYER)
 	
 	for i in size/100000:
 		spawn(FOOD)
@@ -32,7 +35,10 @@ func _process(delta):
 
 func spawn(node):
 	var n = node.instance()
-	add_child(n)
+	if node == PLAYER:
+		$PlayerOrbs.add_child(n)
+	else:
+		add_child(n)
 	randomize()
 	n.position.x = rand_range(-bg.region_rect.size.x/2, bg.region_rect.size.x/2)
 	n.position.y = rand_range(-bg.region_rect.size.y/2, bg.region_rect.size.y/2)

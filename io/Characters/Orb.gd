@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
+const speed = 5
 var size = 1.0
-var speed = 5
 var input_vector = Vector2.ZERO
 
 onready var mesh = $MeshInstance2D
@@ -21,27 +21,32 @@ func scale():
 
 func move():
 	# move orb
-	var input_vector = Vector2.ZERO
 	var mouse_pos = get_global_mouse_position()
 	input_vector = global_position - mouse_pos
 	input_vector *= -1 # inverted
 	input_vector = input_vector.normalized()
 	# fixing teleport bug when mouse gets to close to middle of player
 	var newSpeed = speed
-	newSpeed *= (100 - (size * 10)) / 100 # slowing player if he gets bigger
+	newSpeed *= (100 - (size * 8)) / 100 # slowing player if he gets bigger
 	var dist = mouse_pos.distance_to(global_position)
 	if dist < 100:
 		newSpeed *= (dist / 100)
 	position += input_vector * newSpeed
 
-func eat():
+func check_for_dinner():
 	# if food in player, eat it
 	var foods = get_tree().get_nodes_in_group("food")
 	for food in foods:
 		if area.overlaps_area(food):
 			if food.size < size:
-				size += 0.1 * food.size
-				food.eat()
+				size += food.eat()
+	
+	var orbs = get_tree().get_nodes_in_group("orb")
+	for orb in orbs:
+		if area.overlaps_area(orb.area):
+			# if at least 5% bigger, so not unfair if both players are almost equal sized
+			if orb.size * 1.05 < size:
+				size += orb.eat()
 
 func shrink():
 	# slowly reduce player size

@@ -1,5 +1,7 @@
 extends Control
 
+signal screen_shake()
+
 onready var score = $Score
 onready var overlay = $Overlay
 
@@ -10,6 +12,7 @@ func _ready():
 	update_interface()
 
 func _on_PlayerData_player_died():
+	emit_signal("screen_shake")
 	yield(get_tree().create_timer(1), "timeout")
 	overlay.visible = true
 	PlayerData.reset() # needs to go somewhere else

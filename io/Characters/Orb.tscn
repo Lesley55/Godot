@@ -11,7 +11,9 @@ height = 100.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 50.0
 
-[node name="Orb" type="KinematicBody2D"]
+[node name="Orb" type="KinematicBody2D" groups=[
+"orb",
+]]
 script = ExtResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]

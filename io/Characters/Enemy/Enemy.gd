@@ -15,5 +15,10 @@ func _ready():
 func _process(delta):
 	scale()
 #	move()
-	eat()
+	check_for_dinner()
 	shrink()
+
+func eat():
+	PlayerData.score += size * 100 * 0.5
+	queue_free()
+	return size * 0.5

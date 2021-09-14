@@ -39,8 +39,7 @@ func eat():
 	for food in foods:
 		if area.overlaps_area(food):
 			if food.size < size:
-				size += 0.1 * food.size # veranderen naar iets met score
-#				zoom += 0.025 * food.size
+				size += 0.1 * food.size
 				food.eat()
 
 func shrink():

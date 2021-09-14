@@ -7,7 +7,9 @@
 [ext_resource path="res://Characters/Enemy/States/Die.gd" type="Script" id=5]
 [ext_resource path="res://Characters/Enemy/States/Wander.gd" type="Script" id=6]
 
-[node name="Enemy" instance=ExtResource( 1 )]
+[node name="Enemy" groups=[
+"enemy",
+] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="StateMachine" parent="." index="0"]

@@ -28,6 +28,7 @@ func move():
 	input_vector = input_vector.normalized()
 	# fixing teleport bug when mouse gets to close to middle of player
 	var newSpeed = speed
+	newSpeed *= (100 - (size * 10)) / 100 # slowing player if he gets bigger
 	var dist = mouse_pos.distance_to(global_position)
 	if dist < 100:
 		newSpeed *= (dist / 100)

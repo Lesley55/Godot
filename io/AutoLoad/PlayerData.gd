@@ -17,6 +17,8 @@ func set_name(value: String):
 	value = value.strip_edges() # trim white spaces / unprintable
 	if !value.empty() and value != " ":
 		playerName = value
+	else:
+		playerName = "name"
 
 func set_score(value: int):
 	score = value

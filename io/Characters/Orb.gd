@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const speed = 5
+const SPEED = 5
 var size = 1.0
 var input_vector = Vector2.ZERO
 
@@ -26,7 +26,7 @@ func move():
 	input_vector *= -1 # inverted
 	input_vector = input_vector.normalized()
 	# fixing teleport bug when mouse gets to close to middle of player
-	var newSpeed = speed
+	var newSpeed = SPEED
 	newSpeed *= (100 - (size * 8)) / 100 # slowing player if he gets bigger
 	var dist = mouse_pos.distance_to(global_position)
 	if dist < 100:

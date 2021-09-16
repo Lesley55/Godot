@@ -18,9 +18,7 @@ func _process(delta):
 	
 	# test
 	if Input.is_action_just_pressed("ui_home"):
-		emit_signal("screen_shake")
 		queue_free()
-		PlayerData.die()
 
 func eat():
 	queue_free()

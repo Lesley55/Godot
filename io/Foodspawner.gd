@@ -14,10 +14,10 @@ func _ready():
 	var height = bg.region_rect.size.y
 	size = width * height
 	
-	spawn(PLAYER)
+	_spawn(PLAYER)
 	
 	for i in size/100000:
-		spawn(FOOD)
+		_spawn(FOOD)
 	
 #	# tried to make map size dynamic, but border collision polygon doesn't update??????
 #	border.polygon.set(0, Vector2(-width/2, -height/2))
@@ -28,12 +28,12 @@ func _ready():
 func _process(delta):
 	# maybe replace by resetting and changing position, for performance, instead of deleting and adding node?
 	if get_child_count() < size/100000:
-		spawn(FOOD)
+		_spawn(FOOD)
 	
 	if len(get_tree().get_nodes_in_group("enemy")) < 5:
-		spawn(ENEMY)
+		_spawn(ENEMY)
 
-func spawn(node):
+func _spawn(node):
 	var n = node.instance()
 	if node == PLAYER:
 		$PlayerOrbs.add_child(n)

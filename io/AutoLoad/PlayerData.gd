@@ -9,6 +9,7 @@ var score = 0 setget set_score
 
 func reset():
 	color = Color8(0,0,255,255)
+	color.v
 	playerName = "name"
 	score = 0
 

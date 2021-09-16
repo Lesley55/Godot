@@ -16,6 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+GameSaver="*res://AutoLoad/GameSaver.tscn"
 PlayerData="*res://AutoLoad/PlayerData.tscn"
 SceneChanger="*res://AutoLoad/SceneChanger.tscn"
 

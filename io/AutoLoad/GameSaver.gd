@@ -2,10 +2,11 @@ extends Node
 
 const SAVE_GROUP = "save"
 const SAVE_FOLDER = "user://saves"
-var SAVE_NAME_TEMPLATE = "save_%03d.json" # dat, tres, json
-const _ENCRYPT_PASS = "encrypypa"
+# const, but changing part of string for multiple save files, %03d = 3 digits
+var SAVE_NAME_TEMPLATE = "save_%03d.json" # data types: dat, tres or json
+const _ENCRYPT_PASS = "encrypypa" # encryption key
 
-# maybe change to use a second Thread
+# todo: maybe change to use a second Thread
 
 func save_game(id : int):
 	var save_dict = _get_data_to_save(SAVE_GROUP)

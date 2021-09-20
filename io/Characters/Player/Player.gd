@@ -22,4 +22,4 @@ func _process(delta):
 
 func eat():
 	queue_free()
-	return size
+	return size * 0.5

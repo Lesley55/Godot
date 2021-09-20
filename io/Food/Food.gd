@@ -6,6 +6,7 @@ onready var mesh = $MeshInstance2D
 onready var collisionShape = $CollisionShape2D
 
 func _ready():
+	# give food random size and color
 	randomize()
 	size = rand_range(0.2, 0.6)
 	mesh.scale = Vector2(size, size)

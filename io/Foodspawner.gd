@@ -10,6 +10,7 @@ onready var bg = $background
 onready var border = $Area2D/CollisionPolygon2D
 
 func _ready():
+	# get background size
 	var width = bg.region_rect.size.x
 	var height = bg.region_rect.size.y
 	size = width * height
@@ -34,11 +35,14 @@ func _process(delta):
 		_spawn(ENEMY)
 
 func _spawn(node):
+	# instance scene
 	var n = node.instance()
+	# add scene to current level(scene)
 	if node == PLAYER:
 		$PlayerOrbs.add_child(n)
 	else:
 		add_child(n)
+	# set position
 	randomize()
 	n.position.x = rand_range(-bg.region_rect.size.x/2, bg.region_rect.size.x/2)
 	n.position.y = rand_range(-bg.region_rect.size.y/2, bg.region_rect.size.y/2)

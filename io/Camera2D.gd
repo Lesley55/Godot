@@ -16,7 +16,7 @@ func _process(delta):
 		# position camera in middle of player orbs by taking the average position
 		position = posTotal / len(playerOrbs)
 		
-		# zoom camera by total size of player orbs
+		# zoom camera by total size of all player orbs
 		var z = sizeTotal * 0.4 * (100 - sizeTotal * 2) / 100
 		zoom.x = lerp(zoom.x, z, 0.05)
 		zoom.y = lerp(zoom.y, z, 0.05)

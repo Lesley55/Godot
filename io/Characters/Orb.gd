@@ -16,7 +16,7 @@ func scale():
 	# scale name size
 	orbName.rect_scale.x = lerp(orbName.rect_scale.x, size, 0.1)
 	orbName.rect_scale.y = lerp(orbName.rect_scale.y, size, 0.1)
-	# scales name rightdown, so need to adjust position
+	# name scales rightdown, so need to adjust position
 	orbName.rect_position = nameLabelStartPosition * orbName.rect_scale
 
 func move():

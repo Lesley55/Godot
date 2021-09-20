@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+# preloading scene for when we need to instance a new one when splitting
+#var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
+#var PLAYER = preload("res://Characters/Player/Player.tscn")
+
 const SPEED = 5
 var size = 1.0
 var input_vector = Vector2.ZERO
@@ -8,6 +12,7 @@ onready var mesh = $MeshInstance2D
 onready var area = $MeshInstance2D/Area2D
 onready var orbName = $Name
 onready var nameLabelStartPosition = orbName.rect_position
+onready var timer = $Timer
 
 func scale():
 	# scale orb size
@@ -44,11 +49,25 @@ func check_for_dinner():
 	var orbs = get_tree().get_nodes_in_group("orb")
 	for orb in orbs:
 		if area.overlaps_area(orb.area):
-			# if at least 5% bigger, so not unfair if both players are almost equal sized
-			if orb.size * 1.05 < size:
-				size += orb.eat()
+			# at least % bigger, so not unfair if both players are almost equal sized
+			if orb.size * 1.04 < size:
+				# can't instantly merge after splitting
+				if orb.timer.is_stopped():
+					size += orb.eat()
 
 func shrink():
 	# slowly reduce player size
 	if size > 1:
 		size *= 0.99995 # todo replace by changing score
+
+func split():
+	if size > 1.2:
+		size = size * 0.95 / 2
+		timer.start(10)
+#		var orb = node.instance()
+		var orb = .duplicate()
+		get_parent().add_child(orb)
+		orb.position = position + input_vector * SPEED * size * 100
+		orb.nameLabelStartPosition = nameLabelStartPosition
+		orb.size = size
+		orb.timer.start(10)

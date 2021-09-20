@@ -19,6 +19,8 @@ func _process(delta):
 	# test
 	if Input.is_action_just_pressed("ui_home"):
 		queue_free()
+	if Input.is_action_just_pressed("ui_page_up"):
+		split()
 
 func eat():
 	queue_free()

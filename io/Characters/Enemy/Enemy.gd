@@ -6,6 +6,7 @@ var score = 0
 onready var stateMachine = $StateMachine
 
 func _ready():
+	# assign random name and color
 	randomize()
 	orbName.text = names[rand_range(0, len(names))]
 	mesh.modulate = Color8(rand_range(0,255), rand_range(0,255), rand_range(0,255), 255)
@@ -17,6 +18,9 @@ func _process(delta):
 #	move()
 	check_for_dinner()
 	shrink()
+	
+#	if true:
+#		split(ENEMY)
 
 func eat():
 	PlayerData.score += size * 100 * 0.5

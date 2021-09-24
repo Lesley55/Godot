@@ -4,7 +4,7 @@ extends KinematicBody2D
 #var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
 #var PLAYER = preload("res://Characters/Player/Player.tscn")
 
-const SPEED = 5
+const SPEED = 300
 var size = 1.0
 var input_vector = Vector2.ZERO
 
@@ -24,7 +24,7 @@ func scale():
 	# name scales rightdown, so need to adjust position
 	orbName.rect_position = nameLabelStartPosition * orbName.rect_scale
 
-func move():
+func move(delta):
 #	# fixing teleport bug when mouse gets to close to middle of player
 #	var newSpeed = SPEED
 #	newSpeed *= (100 - (size * 8)) / 100 # slowing player if he gets bigger
@@ -33,7 +33,7 @@ func move():
 #		newSpeed *= (dist / 100)
 #	position += input_vector * newSpeed
 	input_vector = input_vector.normalized()
-	position += input_vector * SPEED
+	position += input_vector * SPEED * delta
 
 func check_for_dinner():
 	# get all food nodes
@@ -64,18 +64,18 @@ func shrink():
 	if size > 1:
 		size *= 0.99995
 
-func split():
+func split(delta):
 	# can't split infinitely smaller need to be at least bigger than starting size
 	if size > 1.2:
 		# loose some size for using, then half size
-		size = size * 0.95 / 2
+		size = size * 0.97 / 2
 		# start timer, to prevent instantly merging again
 		timer.start(10)
 		# duplicate orb and add to scene
 		var orb = .duplicate()
 		get_parent().add_child(orb)
 		# give duplicate the same properties
-		orb.position = position + input_vector * SPEED * size * 100
+		orb.position = position + input_vector * SPEED * size * 100 * delta
 		orb.nameLabelStartPosition = nameLabelStartPosition
 		orb.size = size
 		orb.timer.start(10)

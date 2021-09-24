@@ -16,12 +16,12 @@ func _ready():
 func _process(delta):
 	scale()
 	input_vector = _get_input_vector()
-	move()
+	move(delta)
 	check_for_dinner()
 	shrink()
 	
 #	if true:
-#		split(ENEMY)
+#		split(delta)
 
 func _get_input_vector():
 	var vector = Vector2.ZERO

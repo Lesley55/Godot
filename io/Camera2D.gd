@@ -7,6 +7,7 @@ func _process(delta):
 	playerOrbs = get_tree().get_nodes_in_group("player")
 	
 	if !playerOrbs.empty():
+		# get positions and sizes
 		var posTotal = Vector2.ZERO
 		var sizeTotal = 1
 		for orb in playerOrbs:
@@ -17,10 +18,11 @@ func _process(delta):
 		position = posTotal / len(playerOrbs)
 		
 		# zoom camera by total size of all player orbs
-		var z = sizeTotal * 0.4 * (100 - sizeTotal * 2) / 100
+		var z = sizeTotal * 0.6
+		z /= (100 + sizeTotal * 2) / 100 # zoom in a bit when bigger
 		zoom.x = lerp(zoom.x, z, 0.05)
 		zoom.y = lerp(zoom.y, z, 0.05)
 		
 		# bird view for testing
 		if Input.is_action_pressed("ui_page_up"):
-			zoom = Vector2(10, 10)
+			zoom = Vector2(12, 12)

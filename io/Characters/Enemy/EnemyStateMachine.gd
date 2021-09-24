@@ -3,8 +3,7 @@ extends "res://StateMachine/StateMachine.gd"
 func _ready():
 	states_map = {
 		"wander": $Wander,
-		"chase": $Chase,
-		"die": $Die,
+		"chase": $Chase
 	}
 
 func _change_state(state_name):

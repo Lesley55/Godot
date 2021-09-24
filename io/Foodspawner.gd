@@ -7,7 +7,7 @@ var PLAYER = preload("res://Characters/Player/Player.tscn")
 var size = 1000
 
 onready var bg = $background
-onready var border = $Area2D/CollisionPolygon2D
+onready var border = $Border/CollisionPolygon2D
 
 func _ready():
 	# get background size

@@ -6,8 +6,6 @@ const LENGTH = 15
 var _data = []
 var _current_score = {}
 
-onready var scoreList = $ScoreList
-
 func save():
 	_current_score = {
 		playerName = PlayerData.playerName, 

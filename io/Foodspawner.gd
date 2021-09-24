@@ -42,7 +42,23 @@ func _spawn(node):
 		$PlayerOrbs.add_child(n)
 	else:
 		add_child(n)
+	
 	# set position
 	randomize()
-	n.position.x = rand_range(-bg.region_rect.size.x/2, bg.region_rect.size.x/2)
-	n.position.y = rand_range(-bg.region_rect.size.y/2, bg.region_rect.size.y/2)
+	_change_position(n)
+	# if an orb is already in spawnlocation, change position again
+	while _in_orb(n):
+		_change_position(n)
+
+# check if node is touching an orb
+func _in_orb(node):
+	var orbs = get_tree().get_nodes_in_group("orb")
+	for orb in orbs:
+		if node.area.overlaps_area(orb.area):
+			return true
+	return false
+
+# randomly change position of node in playing field
+func _change_position(node):
+	node.position.x = rand_range(-bg.region_rect.size.x/2, bg.region_rect.size.x/2)
+	node.position.y = rand_range(-bg.region_rect.size.y/2, bg.region_rect.size.y/2)

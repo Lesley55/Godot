@@ -40,7 +40,7 @@ func check_for_dinner():
 	var foods = get_tree().get_nodes_in_group("food")
 	for food in foods:
 		# if food in player, eat it
-		if area.overlaps_area(food):
+		if area.overlaps_area(food.area):
 			if food.size < size:
 				size += food.eat()
 	
@@ -55,7 +55,7 @@ func check_for_dinner():
 				# at least % bigger, so not unfair if both players are almost equal sized
 				if orb.size * 1.04 < size:
 					# can't instantly merge after splitting
-					if orb.timer.is_stopped():
+					if orb.can_be_eaten():
 						# eat orb/enemy
 						size += orb.eat()
 
@@ -79,3 +79,6 @@ func split():
 		orb.nameLabelStartPosition = nameLabelStartPosition
 		orb.size = size
 		orb.timer.start(10)
+
+func can_be_eaten():
+	return timer.is_stopped()

@@ -15,12 +15,17 @@ func _ready():
 
 func _process(delta):
 	scale()
-#	move()
+	input_vector = _get_input_vector()
+	move()
 	check_for_dinner()
 	shrink()
 	
 #	if true:
 #		split(ENEMY)
+
+func _get_input_vector():
+	var vector = Vector2.ZERO
+	return vector
 
 func eat():
 	PlayerData.score += size * 100 * 0.5

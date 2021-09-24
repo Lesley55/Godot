@@ -37,7 +37,7 @@ func _process(delta):
 func _spawn(node):
 	# instance scene
 	var n = node.instance()
-	# add scene to current level(scene)
+	# add node to current level scene
 	if node == PLAYER:
 		$PlayerOrbs.add_child(n)
 	else:

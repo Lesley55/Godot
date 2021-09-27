@@ -19,9 +19,7 @@ func _process(delta):
 	move(delta)
 	check_for_dinner()
 	shrink()
-	
-#	if true:
-#		split(delta)
+#	split(delta)
 
 func _get_input_vector():
 	var vector = Vector2.ZERO

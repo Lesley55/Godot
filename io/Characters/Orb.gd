@@ -62,7 +62,8 @@ func check_for_dinner():
 func shrink():
 	# slowly reduce player size
 	if size > 1:
-		size *= 0.99995
+#		size *= 0.99995
+		size *= (100 - size / 1000) / 100
 
 func split(delta):
 	# can't split infinitely smaller need to be at least bigger than starting size

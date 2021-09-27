@@ -46,9 +46,12 @@ func _spawn(node):
 	# set position
 	randomize()
 	_change_position(n)
-	# if an orb is already in spawnlocation, change position again
-	while _in_orb(n):
-		_change_position(n)
+	# don't spawn inside another orb
+	if _in_orb(n):
+		n.free()
+#	# if an orb is already in spawnlocation, change position again
+#	while _in_orb(n):
+#		_change_position(n)
 
 # check if node is touching an orb
 func _in_orb(node):

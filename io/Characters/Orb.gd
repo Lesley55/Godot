@@ -33,7 +33,10 @@ func move(delta):
 #		newSpeed *= (dist / 100)
 #	position += input_vector * newSpeed
 	input_vector = input_vector.normalized()
+	# normally you use build in functions like move_and_slide/collide to handle collisions
+	# but i need orb to overlap, so changing the position manually
 	position += input_vector * SPEED * delta
+#	velocity = move_and_slide(input_vector * SPEED)
 
 func check_for_dinner():
 	# get all food nodes
@@ -59,10 +62,10 @@ func check_for_dinner():
 						# eat orb/enemy
 						size += orb.eat()
 
+# slowly reduce player size
 func shrink():
-	# slowly reduce player size
 	if size > 1:
-#		size *= 0.99995
+		# reduce size more when bigger, so won't be able to get infinitely bigger.
 		size *= (100 - size / 1000) / 100
 
 func split(delta):

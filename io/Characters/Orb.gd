@@ -5,8 +5,12 @@ extends KinematicBody2D
 #var PLAYER = preload("res://Characters/Player/Player.tscn")
 
 const SPEED = 300
+const DASHMULTIPLICATION = 6
+const DASHFRICTION = 3.0
 var size = 1.0
 var input_vector = Vector2.ZERO
+var split_dash = false
+var dash_vector = Vector2.ZERO
 
 onready var mesh = $MeshInstance2D
 onready var area = $MeshInstance2D/Area2D
@@ -25,19 +29,31 @@ func scale():
 	orbName.rect_position = nameLabelStartPosition * orbName.rect_scale
 
 func move(delta):
-#	# fixing teleport bug when mouse gets to close to middle of player
-#	var newSpeed = SPEED
-#	newSpeed *= (100 - (size * 8)) / 100 # slowing player if he gets bigger
-#	var dist = mouse_pos.distance_to(global_position)
-#	if dist < 100:
-#		newSpeed *= (dist / 100)
-#	position += input_vector * newSpeed
 	input_vector = input_vector.normalized()
-	# normally you use build in functions like move_and_slide/collide to handle collisions
-	# but i need orb to overlap, so changing the position manually
-	position += input_vector * SPEED * delta
-#	velocity = move_and_slide(input_vector * SPEED)
+	
+	if split_dash:
+		position += dash_vector * delta
+		dash_vector = lerp(dash_vector, Vector2.ZERO, DASHFRICTION * delta)
+		# stop dash, return to normal movement if dash isn't faster anymore
+		var normal = dash_vector.normalized() * SPEED
+		if dash_vector.abs() <= normal.abs():
+			split_dash = false
+	else:
+#		# doesn't work if i also want to use this func for enemy
+#		# fixing teleport bug when mouse gets to close to middle of player
+#		var newSpeed = SPEED
+#		newSpeed *= (100 - (size * 8)) / 100 # slowing player if he gets bigger
+#		var dist = mouse_pos.distance_to(global_position)
+#		if dist < 100:
+#			newSpeed *= (dist / 100)
+#		position += input_vector * newSpeed
+		
+		# normally you use build in functions like move_and_slide/collide to handle collisions
+		# but i need orb to overlap, so changing the position manually
+		position += input_vector * SPEED * delta
+#		velocity = move_and_slide(input_vector * SPEED)
 
+# check if there is andy other node like food or orb that can be eaten
 func check_for_dinner():
 	# get all food nodes
 	var foods = get_tree().get_nodes_in_group("food")
@@ -72,17 +88,21 @@ func split(delta):
 	# can't split infinitely smaller need to be at least bigger than starting size
 	if size > 1.2:
 		# loose some size for using, then half size
-		size = size * 0.97 / 2
+		size = size * 0.98 / 2
 		# start timer, to prevent instantly merging again
 		timer.start(10)
 		# duplicate orb and add to scene
 		var orb = .duplicate()
 		get_parent().add_child(orb)
+		
 		# give duplicate the same properties
-		orb.position = position + input_vector * SPEED * size * 100 * delta
+		orb.position = position
 		orb.nameLabelStartPosition = nameLabelStartPosition
 		orb.size = size
-		orb.timer.start(10)
+		
+		orb.timer.start(10) # start split timer
+		orb.split_dash = true # dash after spitting
+		orb.dash_vector = input_vector.normalized() * (SPEED + size) * DASHMULTIPLICATION # dash speed
 
 func can_be_eaten():
 	return timer.is_stopped()

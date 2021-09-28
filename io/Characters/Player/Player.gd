@@ -17,11 +17,16 @@ func _process(delta):
 	# uncomment if any check on size or collision should perform after this point
 #	scale()
 	
+	if Input.is_action_just_pressed("ui_accept"):
+		split(delta)
+	
 	# test
 	if Input.is_action_just_pressed("self_destruct"):
 		queue_free()
-	if Input.is_action_just_pressed("ui_accept"):
-		split(delta)
+	if Input.is_action_just_pressed("ui_up"):
+		size += 1
+	if Input.is_action_just_pressed("ui_down"):
+		size -= 1
 
 func _get_mouse_input_vector():
 	# get mouse position

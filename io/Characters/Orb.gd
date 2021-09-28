@@ -1,9 +1,5 @@
 extends KinematicBody2D
 
-# preloading scene for when we need to instance a new one when splitting
-#var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
-#var PLAYER = preload("res://Characters/Player/Player.tscn")
-
 const SPEED = 300
 const DASHMULTIPLICATION = 6
 const DASHFRICTION = 3.0
@@ -31,26 +27,27 @@ func scale():
 func move(delta):
 	input_vector = input_vector.normalized()
 	
+	var newSpeed = SPEED
+	newSpeed *= (100 - (size * 3)) / 100 # slowing orb if he gets bigger
+	
 	if split_dash:
 		position += dash_vector * delta
 		dash_vector = lerp(dash_vector, Vector2.ZERO, DASHFRICTION * delta)
 		# stop dash, return to normal movement if dash isn't faster anymore
-		var normal = dash_vector.normalized() * SPEED
+		var normal = dash_vector.normalized() * newSpeed
 		if dash_vector.abs() <= normal.abs():
 			split_dash = false
 	else:
-#		# doesn't work if i also want to use this func for enemy
-#		# fixing teleport bug when mouse gets to close to middle of player
-#		var newSpeed = SPEED
-#		newSpeed *= (100 - (size * 8)) / 100 # slowing player if he gets bigger
-#		var dist = mouse_pos.distance_to(global_position)
-#		if dist < 100:
-#			newSpeed *= (dist / 100)
-#		position += input_vector * newSpeed
+		# fixing teleport bug when mouse gets to close to middle of player
+		if name == "Player":
+			var mouse_pos = get_global_mouse_position()
+			var dist = mouse_pos.distance_to(global_position)
+			if dist < 100:
+				newSpeed *= (dist / 100)
 		
 		# normally you use build in functions like move_and_slide/collide to handle collisions
 		# but i need orb to overlap, so changing the position manually
-		position += input_vector * SPEED * delta
+		position += input_vector * newSpeed * delta
 #		velocity = move_and_slide(input_vector * SPEED)
 
 # check if there is andy other node like food or orb that can be eaten
@@ -88,7 +85,7 @@ func split(delta):
 	# can't split infinitely smaller need to be at least bigger than starting size
 	if size > 1.2:
 		# loose some size for using, then half size
-		size = size * 0.98 / 2
+		size = size * 0.985 / 2
 		# start timer, to prevent instantly merging again
 		timer.start(10)
 		# duplicate orb and add to scene
@@ -104,5 +101,7 @@ func split(delta):
 		orb.split_dash = true # dash after spitting
 		orb.dash_vector = input_vector.normalized() * (SPEED + size) * DASHMULTIPLICATION # dash speed
 
+# check if timer is finished so you can't instantly merge after splitting
 func can_be_eaten():
+	# ToDo: fix bug, invurnarable after splitting, now you can also not be eaten by an enemy
 	return timer.is_stopped()

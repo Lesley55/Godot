@@ -4,6 +4,7 @@ const names = ["Wracker", "Annihilator", "Finisher", "Wrecker", "Destroyer", "Ov
 var score = 0
 
 onready var stateMachine = $StateMachine
+onready var detectionArea = $DetectionArea
 
 func _ready():
 	# assign random name and color

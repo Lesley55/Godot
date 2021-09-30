@@ -32,9 +32,12 @@ func _get_input_vector():
 	# search for area to pursue or flee from
 	for s_area in surrounding:
 		if s_area.name == "Border":
-			# ToDo: get away from border
-			print("border")
-		elif s_area != area and !s_area.name == "DetectionArea": # not when own area or detection area
+			# might look ugly, but can't use normal collision detection, 
+			# because of manipulation the position manually (see move function)
+			return Vector2.ZERO - global_position
+		
+		# not when own area or detection area
+		elif s_area != area and !s_area.name == "DetectionArea":
 			if s_area.get_parent().get_parent().size > size:
 				flee = true
 			elif !flee:
@@ -53,10 +56,9 @@ func _get_input_vector():
 		# ToDo: flee
 		pass
 	else:
-		# if nothing in surrounding, wander in random direction
+		# if nothing in surrounding, keep wandering in current direction
 		if target_area == null:
 			vector = input_vector
-#			vector = Vector2(rand_range(-1,1), rand_range(-1,1)) * 10 # times 10 so it isn't super slow, will get normalized anyway
 		else:
 			# move in direction of target
 			vector = target_area.global_position - global_position

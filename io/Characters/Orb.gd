@@ -4,7 +4,7 @@ const SPEED = 300
 const DASHMULTIPLICATION = 6
 const DASHFRICTION = 3.0
 var size = 1.0
-var input_vector = Vector2.ZERO
+var input_vector = Vector2.DOWN
 var split_dash = false
 var dash_vector = Vector2.ZERO
 
@@ -61,7 +61,7 @@ func check_for_dinner():
 			if food.size < size:
 				var s = food.eat()
 				size += s
-				if owner.name == "Player":
+				if name == "Player":
 					PlayerData.score += s * 100
 	
 	# get all orbs
@@ -79,7 +79,7 @@ func check_for_dinner():
 						# eat orb/enemy
 						var s = orb.eat()
 						size += s
-						if owner.name == "Player":
+						if name == "Player":
 							PlayerData.score += s * 100
 
 # slowly reduce player size

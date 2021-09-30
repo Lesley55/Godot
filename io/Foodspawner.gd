@@ -4,21 +4,27 @@ var FOOD = preload("res://Food/Food.tscn")
 var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
 var PLAYER = preload("res://Characters/Player/Player.tscn")
 
-var size = 1000
+# export var can be overwritten in editor
+export(int, 5000, 20000, 100) var width = 10000
+export(int, 5000, 20000, 100) var height = 10000
+var size = 100000
 
 onready var bg = $background
 onready var border = $Border/CollisionPolygon2D
 
 func _ready():
 	# get background size
-	var width = bg.region_rect.size.x
-	var height = bg.region_rect.size.y
+	bg.region_rect.size.x = width
+	bg.region_rect.size.y = height
 	size = width * height
 	
 	_spawn(PLAYER)
 	
 	for i in size/100000:
 		_spawn(FOOD)
+	
+	for i in size/5000000:
+		_spawn(ENEMY)
 	
 	# update border polygon to match playfield(bg) size
 	var polygon = border.get_polygon()
@@ -31,10 +37,11 @@ func _ready():
 
 func _process(delta):
 	# maybe replace by resetting and changing position, for performance, instead of deleting and adding node?
-	if get_child_count() < size/100000:
+	if len(get_tree().get_nodes_in_group("food")) < size/100000:
+#	if get_child_count() < size/100000: # almost same but might be more performant?
 		_spawn(FOOD)
 	
-	if len(get_tree().get_nodes_in_group("enemy")) < 5:
+	if len(get_tree().get_nodes_in_group("enemy")) < size/5000000:
 		_spawn(ENEMY)
 
 func _spawn(node):

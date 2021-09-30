@@ -55,7 +55,8 @@ func _get_input_vector():
 	else:
 		# if nothing in surrounding, wander in random direction
 		if target_area == null:
-			vector = Vector2(rand_range(-1,1), rand_range(-1,1)) * 10 # times 10 so it isn't super slow, will get normalized anyway
+			vector = input_vector
+#			vector = Vector2(rand_range(-1,1), rand_range(-1,1)) * 10 # times 10 so it isn't super slow, will get normalized anyway
 		else:
 			# move in direction of target
 			vector = target_area.global_position - global_position

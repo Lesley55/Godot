@@ -14,6 +14,5 @@ func _ready():
 	mesh.modulate = Color8(rand_range(0,255), rand_range(0,255), rand_range(0,255), 255)
 
 func eat():
-	PlayerData.score += size * 100 * 0.1
 	queue_free()
 	return size * 0.1

@@ -14,7 +14,7 @@ script = ExtResource( 4 )
 z_index = -100
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 10000, 10000 )
+region_rect = Rect2( 0, 0, 5000, 5000 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

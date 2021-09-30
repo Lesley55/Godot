@@ -59,7 +59,10 @@ func check_for_dinner():
 		# if food in player, eat it
 		if area.overlaps_area(food.area):
 			if food.size < size:
-				size += food.eat()
+				var s = food.eat()
+				size += s
+				if owner.name == "Player":
+					PlayerData.score += s * 100
 	
 	# get all orbs
 	var orbs = get_tree().get_nodes_in_group("orb")
@@ -74,7 +77,10 @@ func check_for_dinner():
 					# can't instantly merge after splitting
 					if orb.can_be_eaten():
 						# eat orb/enemy
-						size += orb.eat()
+						var s = orb.eat()
+						size += s
+						if owner.name == "Player":
+							PlayerData.score += s * 100
 
 # slowly reduce player size
 func shrink():

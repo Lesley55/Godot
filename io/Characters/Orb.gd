@@ -10,6 +10,7 @@ var dash_vector = Vector2.ZERO
 
 onready var mesh = $MeshInstance2D
 onready var area = $MeshInstance2D/Area2D
+onready var collisionShape = $MeshInstance2D/Area2D/CollisionShape2D
 onready var orbName = $Name
 onready var nameLabelStartPosition = orbName.rect_position
 onready var timer = $Timer

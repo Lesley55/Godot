@@ -12,6 +12,7 @@ func _process(delta):
 	move(delta)
 	check_for_dinner()
 	shrink()
+	
 	# check_for_dinner and shrink functions change size, so should update orb
 	# currenly unnecessary since its looping, 
 	# uncomment if any check on size or collision should perform after this point
@@ -19,8 +20,7 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_accept"):
 		split(delta)
-	
-	# test
+	# for play testing
 	if Input.is_action_just_pressed("self_destruct"):
 		queue_free()
 	if Input.is_action_just_pressed("ui_up"):

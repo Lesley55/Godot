@@ -6,7 +6,8 @@ func enter():
 	return
 
 func update(delta):
-	var surrounding = owner.playerDetectionZone
+#	var surrounding = owner.detectionZone
+	pass
 	
 #	var direction = (player.global_position - owner.global_position).normalized()
 

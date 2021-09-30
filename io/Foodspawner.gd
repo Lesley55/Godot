@@ -20,11 +20,14 @@ func _ready():
 	for i in size/100000:
 		_spawn(FOOD)
 	
-#	# tried to make map size dynamic, but border collision polygon doesn't update??????
-#	border.polygon.set(0, Vector2(-width/2, -height/2))
-#	border.polygon.set(0, Vector2(-width/2, height/2))
-#	border.polygon.set(0, Vector2(width/2, height/2))
-#	border.polygon.set(0, Vector2(width/2, -height/2))
+	# update border polygon to match playfield(bg) size
+	var polygon = border.get_polygon()
+	polygon.set(0, Vector2(-width/2, -height/2))
+	polygon.set(1, Vector2(-width/2, height/2))
+	polygon.set(2, Vector2(width/2, height/2))
+	polygon.set(3, Vector2(width/2, -height/2))
+	polygon.set(4, Vector2(-width/2, -height/2))
+	border.set_polygon(polygon)
 
 func _process(delta):
 	# maybe replace by resetting and changing position, for performance, instead of deleting and adding node?

@@ -14,7 +14,7 @@ script = ExtResource( 4 )
 z_index = -100
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 80, 40, 10000, 10000 )
+region_rect = Rect2( 0, 0, 10000, 10000 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -23,7 +23,7 @@ region_rect = Rect2( 80, 40, 10000, 10000 )
 [node name="Border" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Border"]
-polygon = PoolVector2Array( -5000, -5000, -5000, 5000, 5000, 5000, 5000, -5000, -5000, -5000, -10100, -10100, 10100, -10100, 10100, 10100, -10100, 10100, -10100, -10100 )
+polygon = PoolVector2Array( -10000, -10000, -10000, 10000, 10000, 10000, 10000, -10000, -10000, -10000, -10100, -10100, 10100, -10100, 10100, 10100, -10100, 10100, -10100, -10100 )
 
 [node name="PlayerOrbs" type="Node2D" parent="."]
 script = ExtResource( 5 )

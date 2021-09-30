@@ -28,18 +28,21 @@ func _get_input_vector():
 	var vector = Vector2.ZERO
 	var target_area = null
 	var flee = false
+	var flee_from = []
 	
 	# search for area to pursue or flee from
 	for s_area in surrounding:
 		if s_area.name == "Border":
-			# might look ugly, but can't use normal collision detection, 
-			# because of manipulation the position manually (see move function)
-			return Vector2.ZERO - global_position
+			if area.overlaps_area(s_area):
+				# might look ugly, but can't use normal collision detection, 
+				# because of manipulation the position manually (see orb move function)
+				return Vector2.ZERO - global_position # towards middle of playfield
 		
 		# not when own area or detection area
 		elif s_area != area and !s_area.name == "DetectionArea":
 			if s_area.get_parent().get_parent().size > size:
 				flee = true
+				flee_from.append(s_area)
 			elif !flee:
 				if target_area != null:
 					# get distances to area's
@@ -51,10 +54,15 @@ func _get_input_vector():
 				else:
 					target_area = s_area
 	
-	# flee from bigger surrounding orbs
+	# flee from bigger surrounding objects
 	if flee:
-		# ToDo: flee
-		pass
+		# get average direction away from enemies
+		var dir = Vector2.ZERO
+		for enemy in flee_from:
+			# normalized, so doesn't flee more from objects that are further away, which provide the smallest threath
+			dir += (global_position - enemy.global_position).normalized()
+		dir /= len(flee_from)
+		vector = dir
 	else:
 		# if nothing in surrounding, keep wandering in current direction
 		if target_area == null:

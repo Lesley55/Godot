@@ -41,20 +41,25 @@ func _get_input_vector():
 	for s_area in surrounding:
 		if s_area.name == "Border":
 			if area.overlaps_area(s_area):
-				# might look ugly, but can't use normal collision detection, 
-				# because of manipulation the position manually (see orb move function)
-				return Vector2.ZERO - global_position # towards middle of playfield
+				flee = true # flee from wall
+				vector = (Vector2.ZERO - global_position).normalized()
 		
 		# not when own area or detection area
 		elif s_area != area and !s_area.name == "DetectionArea":
+			# if detected enemy is bigger, flee
 			if s_area.get_parent().get_parent().size > size:
 				flee = true
 				flee_from.append(s_area)
 			elif !flee:
+				# move towards closest area that is smaller
 				if target_area != null:
 					# get distances to area's
 					var s_dist = global_position - s_area.global_position
+					if s_area.owner.name == "Enemy" or s_area.owner.name == "Player":
+						s_dist *= 0.5 # prioritize orb over food
 					var p_dist = global_position - target_area.global_position
+					if target_area.owner.name == "Enemy" or target_area.owner.name == "Player":
+						p_dist *= 0.5 # prioritize orb over food
 					# target closest area
 					if s_dist.abs() < p_dist.abs():
 						target_area = s_area
@@ -68,8 +73,9 @@ func _get_input_vector():
 		for enemy in flee_from:
 			# normalized, so doesn't flee more from objects that are further away, which provide the smallest threath
 			dir += (global_position - enemy.global_position).normalized()
-		dir /= len(flee_from)
-		vector = dir
+		if len(flee_from) > 1:
+			dir /= len(flee_from)
+		vector += dir
 	else:
 		# if nothing in surrounding, keep wandering in current direction
 		if target_area == null:

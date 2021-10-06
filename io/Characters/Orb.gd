@@ -24,6 +24,9 @@ func scale():
 	orbName.rect_scale.y = lerp(orbName.rect_scale.y, size, 0.1)
 	# name scales rightdown, so need to adjust position
 	orbName.rect_position = nameLabelStartPosition * orbName.rect_scale
+	
+	# display bigger orbs above smaller orbs
+	z_index = size
 
 func move(delta):
 	input_vector = input_vector.normalized()

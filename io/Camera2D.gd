@@ -19,7 +19,7 @@ func _process(delta):
 		
 		# zoom camera by total size of all player orbs
 		var z = sizeTotal * 0.6
-		z /= (100 + sizeTotal * 2) / 100 # zoom in a bit when bigger
+		z /= (100 + sizeTotal * 4) / 100 # zoom in a bit when bigger
 		zoom.x = lerp(zoom.x, z, 0.05)
 		zoom.y = lerp(zoom.y, z, 0.05)
 		

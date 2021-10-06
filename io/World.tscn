@@ -9,8 +9,6 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
-width = 5000
-height = 5000
 
 [node name="background" type="Sprite" parent="."]
 z_index = -100

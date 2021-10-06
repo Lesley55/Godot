@@ -3,7 +3,7 @@ extends "res://Characters/Orb.gd"
 const names = ["Wracker", "Annihilator", "Finisher", "Wrecker", "Destroyer", "Overtaker", "Clencher", "Stabber", "Saboteur", "Masher", "Hitter", "Rebel", "Crusher", "Obliterator", "Eliminator", "Slammer", "Exterminator", "Hell-Raiser", "Thrasher", "Ruiner", "Mutant"]
 var score = 0
 var surrounding = []
-#var surrounding_changed = true # possible todo
+#var surrounding_changed = true # possible todo for performance
 
 onready var stateMachine = $StateMachine
 onready var detectionArea = $DetectionArea
@@ -18,11 +18,18 @@ func _ready():
 
 func _process(delta):
 	scale()
+	_scale_detection_area()
 	input_vector = _get_input_vector()
 	move(delta)
 	check_for_dinner()
 	shrink()
 #	split(delta)
+
+func _scale_detection_area():
+	# increase detection area size when getting bigger
+	var s = (100 + size * 20) / 100
+	detectionArea.scale.x = s
+	detectionArea.scale.y = s
 
 func _get_input_vector():
 	var vector = Vector2.ZERO

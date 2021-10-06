@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Matrix",
+"language": "GDScript",
+"path": "res://MachineLearning/Matrix.gd"
+}, {
+"base": "Node",
+"class": "NeuralNetwork",
+"language": "GDScript",
+"path": "res://MachineLearning/NeuralNetwork.gd"
+}, {
+"base": "Node",
+"class": "Perceptron",
+"language": "GDScript",
+"path": "res://MachineLearning/Perceptron.gd"
+} ]
+_global_script_class_icons={
+"Matrix": "",
+"NeuralNetwork": "",
+"Perceptron": ""
+}
+
 [application]
 
 config/name="io"

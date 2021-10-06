@@ -9,7 +9,7 @@ func _ready():
 func _process(delta):
 	if get_child_count() < 1:
 		time_stop = OS.get_unix_time() # get end time
-		var elapsed_time = time_stop - time_start
+		var elapsed_time = time_stop - time_start # calculate elapsed time
 		print(elapsed_time)
 		PlayerData.die()
 		queue_free()

@@ -56,10 +56,10 @@ func _get_input_vector():
 					# get distances to area's
 					var s_dist = global_position - s_area.global_position
 					if s_area.owner.name == "Enemy" or s_area.owner.name == "Player":
-						s_dist *= 0.5 # prioritize orb over food
+						s_dist *= 0.4 # prioritize orb over food
 					var p_dist = global_position - target_area.global_position
 					if target_area.owner.name == "Enemy" or target_area.owner.name == "Player":
-						p_dist *= 0.5 # prioritize orb over food
+						p_dist *= 0.4 # prioritize orb over food
 					# target closest area
 					if s_dist.abs() < p_dist.abs():
 						target_area = s_area

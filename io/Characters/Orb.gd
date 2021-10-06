@@ -25,7 +25,7 @@ func scale():
 	# name scales rightdown, so need to adjust position
 	orbName.rect_position = nameLabelStartPosition * orbName.rect_scale
 	
-	# display bigger orbs above smaller orbs
+	# display bigger orbs above smaller orbs / on top
 	z_index = size
 
 func move(delta):

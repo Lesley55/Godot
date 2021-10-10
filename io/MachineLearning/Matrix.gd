@@ -50,6 +50,13 @@ func multiply(other):
 			for j in columns:
 				data[i][j] *= other;
 
+func transpose():
+	# turn matrix, rows become columns, columns become rows
+	var result = Self.new(columns, rows)
+	for i in rows:
+		for j in columns:
+			result.data[i][j] = data[j][i]
+
 # get dot product of / multiply two matrices
 static func dot(m1, m2):
 	if m1.columns != m2.rows:

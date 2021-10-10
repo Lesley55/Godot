@@ -56,6 +56,7 @@ func transpose():
 	for i in rows:
 		for j in columns:
 			result.data[i][j] = data[j][i]
+	return result
 
 # get dot product of / multiply two matrices
 static func dot(m1, m2):

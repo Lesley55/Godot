@@ -22,7 +22,6 @@ func _ready():
 	m.multiply(m2)
 	print(m.data)
 	
-	
 	var m3 = Matrix.new(2,3)
 	var m4 = Matrix.new(3,2)
 	m3.random()
@@ -31,3 +30,6 @@ func _ready():
 	print(m4.data)
 	var m5 = Matrix.dot(m3,m4)
 	print(m5.data)
+	
+	var m6 = m5.transpose()
+	print(m6.data)

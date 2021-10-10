@@ -2,7 +2,8 @@ extends Node
 
 class_name Matrix
 
-var Self = load("res://MachineLearning/Matrix.gd")
+# workaround for problem with godot, not aloud to use own name(Matrix) in class file, creates cyclic reference
+var Self = load("res://MachineLearning/Matrix.gd") # Self = Matrix
 
 var data = []
 var rows = 0
@@ -48,3 +49,35 @@ func multiply(other):
 		for i in rows:
 			for j in columns:
 				data[i][j] *= other;
+
+# get dot product of / multiply two matrices
+static func dot(m1, m2):
+	if m1.columns != m2.rows:
+		print("first matrix columns should equal second matrix rows")
+		return
+	
+	# workaround, godot has no static var, so cant access var Self in static function, 
+	# instead getting Matrix class through param matrix: m1.Self, there might be a better way to do this
+	var result = m1.Self.new(m1.rows, m2.columns) # create new matrix
+	
+	# get new matrix value by using new matrix coördinates as row/column of old matrices,
+	# for those coördinates, get sum of (value in m1 row times value in m2 colomn)
+	# example:
+	# m1 = [[a,b,c]
+	#		[d,e,f]]
+	# m2 = [[g,h]
+	#		[i,j]
+	#		[k,l]]
+	# result = [[a*g+b*i+c*k, a*h+b*j+c*l]
+	#			[d*g+e*i+f*k, d*h+e*j+f*l]]
+	for i in m1.rows:
+		for j in m2.columns:
+			# values in rows of m1 times values in columns of m2
+			var sum = 0
+			for k in m1.columns:
+				sum += m1.data[i][k] * m2.data[k][j]
+			
+			# put sum in new matrix
+			result.data[i][j] = sum
+	
+	return result

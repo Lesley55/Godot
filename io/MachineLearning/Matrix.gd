@@ -99,3 +99,11 @@ static func from_array(arr):
 	for i in len(arr):
 		result.data[i][0] = arr[i] # array values become rows
 	return result
+
+# turn matrix into an array
+func to_array():
+	var arr = []
+	for i in rows:
+		for j in columns:
+			arr.append(data[i][j])
+	return arr

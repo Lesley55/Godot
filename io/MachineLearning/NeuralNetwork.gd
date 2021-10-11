@@ -47,4 +47,4 @@ func feed_forward(arr):
 	var outputs = Matrix.dot(weights_hidden_to_output, hidden)
 	
 	# return output values
-	return outputs
+	return outputs.to_array()

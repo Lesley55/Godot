@@ -8,8 +8,8 @@ var NeuralNetwork = load("res://MachineLearning/NeuralNetwork.gd")
 
 func _ready():
 #	test_perceptron()
-	test_matrix()
-#	test_neural_network()
+#	test_matrix()
+	test_neural_network()
 
 func test_perceptron():
 	# Perceptron test
@@ -70,3 +70,5 @@ func test_matrix():
 func test_neural_network():
 	var n = NeuralNetwork.new(2,2,2)
 	var inputs = [1,2]
+	var outputs = n.feed_forward(inputs)
+	print(outputs)

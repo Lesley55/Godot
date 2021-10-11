@@ -62,7 +62,16 @@ func train(inputs, targets):
 	targets = Matrix.from_array(targets)
 	
 	# calculate error: difference between output and target
-	var errors = targets.subtract(outputs) # note: not static, this changes targets matrix
+	var output_errors = targets.subtract(outputs) # note: not static, this changes targets matrix
+	
+	# ToDo: loop over multiple hidden layers
+	# turn matrix for going backwards through neural network layers
+	var weights_hidden_output_transposed = weights_hidden_to_output.transpose()
+	# calculate previous/hidden layer errors
+	var hidden_errors = Matrix.dot(weights_hidden_output_transposed, output_errors)
+	
+	# derivative sigmoid * error *... WHY
+	
 	
 	
 	

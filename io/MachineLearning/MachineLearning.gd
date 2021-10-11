@@ -8,11 +8,10 @@ var NeuralNetwork = load("res://MachineLearning/NeuralNetwork.gd")
 
 func _ready():
 #	test_perceptron()
-	test_matrix()
-#	test_neural_network()
+#	test_matrix()
+	test_neural_network()
 
 func test_perceptron():
-	# Perceptron test
 	var p = Perceptron.new(2)
 	print(p.weights)
 	# learn perceptron to output 1 if first input < second input
@@ -33,7 +32,6 @@ func test_perceptron():
 	# reason for occasional false is that the learning rate is big, so will overshoot the perfect weight value
 
 func test_matrix():
-	# Matrix math test
 	var m = Matrix.new(2,2)
 	print(m.data)
 	m.random()

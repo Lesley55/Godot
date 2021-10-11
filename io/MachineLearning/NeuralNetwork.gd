@@ -37,9 +37,13 @@ func _init(inputs, hidden_nodes, outputs):
 #	weights_bias_hidden.random()
 #	weights_bias_output.random()
 
+# use inputs to calculate the values of the nodes in the next layer
+# do the same with the value of previous layer for every layer in the neural network
 func feed_forward(arr):
-	# turn array into matrix
+	# turn inputs array into matrix
 	var inputs = Matrix.from_array(arr)
+	
+	# ToDo: bias
 	
 	# hidden value is weighted sum of all inputs times weights
 	var hidden = Matrix.dot(weights_input_to_hidden, inputs)
@@ -48,3 +52,17 @@ func feed_forward(arr):
 	
 	# return output values
 	return outputs.to_array()
+
+# supervised learning
+# adjust the weights based on the known answers of certain inputs
+func train(inputs, targets):
+	var outputs = feed_forward(inputs) # get outputs array
+	# turn array into matrix so i can perform matrix math
+	outputs = Matrix.from_array(outputs)
+	targets = Matrix.from_array(targets)
+	
+	# calculate error: difference between output and target
+	var errors = targets.subtract(outputs) # note: not static, this changes targets matrix
+	
+	
+	

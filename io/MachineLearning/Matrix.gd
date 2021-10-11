@@ -38,6 +38,18 @@ func add(other):
 			for j in columns:
 				data[i][j] += other;
 
+func subtract(other):
+	if other is Self: # if also a matrix
+		# subtract each value in matrix from corresponding value from other matrix
+		for i in rows:
+			for j in columns:
+				data[i][j] -= other.data[i][j]
+	else:
+		# subtract number from all values in matrix
+		for i in rows:
+			for j in columns:
+				data[i][j] -= other;
+
 func multiply(other):
 	if other is Self: # if also a matrix
 		# mutiply each value in matrix by corresponding value from other matrix

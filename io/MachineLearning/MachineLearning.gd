@@ -1,10 +1,37 @@
 extends Node
 
+var Perceptron = load("res://MachineLearning/Perceptron.gd")
 var Matrix = load("res://MachineLearning/Matrix.gd")
 
 # not used in game, only for testing
 
 func _ready():
+	test_perceptron()
+#	test_matrix()
+
+func test_perceptron():
+	# Perceptron test
+	var p = Perceptron.new(2)
+	print(p.weights)
+	# learn perceptron to output 1 if first input < second input
+	for i in range(200):
+		# random inputs
+		var inputs = [rand_range(-1,1), rand_range(-1,1)]
+		# answer that should be given
+		var target = 0
+		if inputs[0] < inputs[1]:
+			target = 1
+		else:
+			target = -1
+		var g = p.guess(inputs)
+		print(g == target) # print if guessed the right answer
+		p.train(inputs, target) # train
+#		print(p.weights)
+	# starts with a lot of false, after a while, almost all true / good guesses,
+	# reason for occasional false is that the learning rate is big, so will overshoot the perfect weight value
+
+func test_matrix():
+	# Matrix math test
 	var m = Matrix.new(2,2)
 	print(m.data)
 	m.random()

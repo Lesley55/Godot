@@ -2,12 +2,14 @@ extends Node
 
 var Perceptron = load("res://MachineLearning/Perceptron.gd")
 var Matrix = load("res://MachineLearning/Matrix.gd")
+var NeuralNetwork = load("res://MachineLearning/NeuralNetwork.gd")
 
 # not used in game, only for testing
 
 func _ready():
-	test_perceptron()
-#	test_matrix()
+#	test_perceptron()
+	test_matrix()
+#	test_neural_network()
 
 func test_perceptron():
 	# Perceptron test
@@ -60,3 +62,11 @@ func test_matrix():
 	
 	var m6 = m5.transpose()
 	print(m6.data)
+	
+	var arr = [1,2,3]
+	var m7 = Matrix.from_array(arr)
+	print(m7.data)
+
+func test_neural_network():
+	var n = NeuralNetwork.new(2,2,2)
+	var inputs = [1,2]

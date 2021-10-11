@@ -7,12 +7,13 @@ class_name NeuralNetwork
 
 var Matrix = load("res://MachineLearning/Matrix.gd")
 
-var inputs = null
-var hidden = null
-var outputs = null
+var inputs = 0
+var hidden = 0
+var outputs = 0
 
 # shape the neural network
-func _init(inputs, hidden_layers, outputs):
+func _init(inputs, hidden_nodes, outputs):
 	self.inputs = inputs
-	self.hidden = hidden_layers
+	self.hidden = hidden_nodes # only one hidden row for now
 	self.outputs = outputs
+

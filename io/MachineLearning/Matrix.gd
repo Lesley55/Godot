@@ -24,7 +24,7 @@ func random():
 	# give a random value to every item in the matrix
 	for i in rows:
 		for j in columns:
-			data[i][j] = rand_range(0,10)
+			data[i][j] = rand_range(-1,1)
 
 func add(other):
 	if other is Self: # if also a matrix
@@ -50,6 +50,7 @@ func multiply(other):
 			for j in columns:
 				data[i][j] *= other;
 
+# not sure if i should make this function static
 func transpose():
 	# turn matrix, rows become columns, columns become rows
 	var result = Self.new(columns, rows)
@@ -64,9 +65,9 @@ static func dot(m1, m2):
 		print("first matrix columns should equal second matrix rows")
 		return
 	
-	# workaround, godot has no static var, so cant access var Self in static function, 
-	# instead getting Matrix class through param matrix: m1.Self, there might be a better way to do this
-	var result = m1.Self.new(m1.rows, m2.columns) # create new matrix
+	# godot has no static variables, so cant access non static var Self in static function, 
+	var Self = load("res://MachineLearning/Matrix.gd") # workaround
+	var result = Self.new(m1.rows, m2.columns) # create new matrix
 	
 	# get new matrix value by using new matrix coördinates as row/column of old matrices,
 	# for those coördinates, get sum of (value in m1 row times value in m2 colomn)
@@ -88,4 +89,13 @@ static func dot(m1, m2):
 			# put sum in new matrix
 			result.data[i][j] = sum
 	
+	return result
+
+# create new matrix with values from array
+static func from_array(arr):
+	# godot has no static variables, so cant access non static var Self in static function, 
+	var Self = load("res://MachineLearning/Matrix.gd") # workaround
+	var result = Self.new(len(arr), 1)
+	for i in len(arr):
+		result.data[i][0] = arr[i] # array values become rows
 	return result

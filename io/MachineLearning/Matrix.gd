@@ -119,3 +119,29 @@ func to_array():
 		for j in columns:
 			arr.append(data[i][j])
 	return arr
+
+func activation():
+	# change every value in matrix with activation function
+	
+	# restrict values (if one input is always between 0 and 1 while the other input could be between 0 and a very high number, the big sometimes big number might affect the weights different or have a bigger impact on changing the weights)
+	# change all values to something relative but with a smaller difference, so one input doesn't overshadow another
+	
+	# create non-linearity in neural network (don't just draw a straight line through all possible inputs, not everything can be devided that easily)
+	
+	for i in rows:
+		for j in columns:
+			# chose tanh over sigmoid because it's zero centered wich is supposed to give better results,
+			# both still have the vanishing gradient problem (the slope getting closer to 0 when backpropagating to previous layers), 
+			# not sure if something like ReLU (not sure how to use this one) or a different activation function would be better, so sticking with tanh for now
+			
+			# get a value between -1 and 1 relative to previous value
+			data[i][j] = tanh(data[i][j])
+
+func derivative():
+	# change every value in matrix to slope of activation function
+	for i in rows:
+		for j in columns:
+			# calculate slope of function tanh at x
+			# math on internet says 1 minus, tutorial says 1 devided by, don't understand wich one is correct
+			data[i][j] = 1 - pow(tanh(data[i][j]), 2)
+#			data[i][j] = 1 / pow(tanh(data[i][j]), 2)

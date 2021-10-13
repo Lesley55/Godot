@@ -19,6 +19,8 @@ var weights_hidden_to_output = null
 var weights_bias_hidden = null
 var weights_bias_output = null
 
+var learning_rate = 0.1 # decide size of adjustments, if bigger, learns faster, but will also overshoot more
+
 # shape the neural network
 func _init(inputs, hidden_nodes, outputs):
 	n_inputs = inputs
@@ -47,8 +49,13 @@ func feed_forward(arr):
 	
 	# hidden value is weighted sum of all inputs times weights
 	var hidden = Matrix.dot(weights_input_to_hidden, inputs)
+	# let outputs of the hidden layer pass through activation function
+	hidden.activation()
+	
 	# output value is weighted sum of all hidden values times weights
 	var outputs = Matrix.dot(weights_hidden_to_output, hidden)
+	# let outputs of the output layer pass through activation function
+	outputs.activation()
 	
 	# return output values
 	return outputs.to_array()
@@ -70,8 +77,17 @@ func train(inputs, targets):
 	# calculate previous/hidden layer errors
 	var hidden_errors = Matrix.dot(weights_hidden_output_transposed, output_errors)
 	
-	# derivative sigmoid * error *... WHY
+	# slope of activation function * errors * learningrate
+	var gradients_output = outputs.derivative()
+	gradients_output.multiply(output_errors)
+	gradients_output.multiply(learning_rate)
 	
+#	var gradients_hidden = hidden.derivative()
+#	gradients_hidden.multiply(hidden_errors)
+#	gradients_hidden.multiply(learning_rate)
 	
-	
-	
+	# calculate delta's: amount weights should change by
+#	hidden.transpose() # turn for backwards
+#	var weights_hidden_to_output_delta = Matrix.dot(gradients_output, hidden)
+#	weights_hidden_to_output.add(weights_hidden_to_output_delta)
+

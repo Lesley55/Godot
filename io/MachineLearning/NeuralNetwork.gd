@@ -63,10 +63,22 @@ func feed_forward(arr):
 # supervised learning
 # adjust the weights based on the known answers of certain inputs
 func train(inputs, targets):
-	var outputs = feed_forward(inputs) # get outputs array
+#	var outputs = feed_forward(inputs) # get outputs array
+	
+	# litterally copied feed_forward function instead of using it
+	# because i need matrix values of the hidden layers to adjust the weights
+	inputs = Matrix.from_array(inputs)
+	var hidden = Matrix.dot(weights_input_to_hidden, inputs)
+	hidden.activation()
+	var outputs = Matrix.dot(weights_hidden_to_output, hidden)
+	outputs.activation()
+	#########################################################################
+	
 	# turn array into matrix so i can perform matrix math
-	outputs = Matrix.from_array(outputs)
+#	outputs = Matrix.from_array(outputs) # this step became unnecessary
 	targets = Matrix.from_array(targets)
+	
+	# backpropagation #
 	
 	# calculate error: difference between output and target
 	var output_errors = targets.subtract(outputs) # note: not static, this changes targets matrix
@@ -77,17 +89,23 @@ func train(inputs, targets):
 	# calculate previous/hidden layer errors
 	var hidden_errors = Matrix.dot(weights_hidden_output_transposed, output_errors)
 	
+	# calculate delta's: amount weights should change by
 	# slope of activation function * errors * learningrate
 	var gradients_output = outputs.derivative()
 	gradients_output.multiply(output_errors)
 	gradients_output.multiply(learning_rate)
 	
-#	var gradients_hidden = hidden.derivative()
-#	gradients_hidden.multiply(hidden_errors)
-#	gradients_hidden.multiply(learning_rate)
+	# gradients for next layer
+	var gradients_hidden = hidden.derivative()
+	gradients_hidden.multiply(hidden_errors)
+	gradients_hidden.multiply(learning_rate)
 	
-	# calculate delta's: amount weights should change by
-#	hidden.transpose() # turn for backwards
-#	var weights_hidden_to_output_delta = Matrix.dot(gradients_output, hidden)
-#	weights_hidden_to_output.add(weights_hidden_to_output_delta)
-
+	# change weights hidden to output layer
+	hidden.transpose() # turn for backwards
+	var weights_hidden_to_output_delta = Matrix.dot(gradients_output, hidden)
+	weights_hidden_to_output.add(weights_hidden_to_output_delta)
+	
+	# change weights input to hidden layer
+	inputs.transpose() # turn for backwards
+	var weights_input_to_hidden_delta = Matrix.dot(gradients_hidden, inputs)
+	weights_input_to_hidden.add(weights_input_to_hidden_delta)

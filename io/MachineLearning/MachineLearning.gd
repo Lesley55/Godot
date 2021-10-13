@@ -69,6 +69,17 @@ func test_matrix():
 
 func test_neural_network():
 	var n = NeuralNetwork.new(2,2,2)
-	var inputs = [1,2]
-	var outputs = n.feed_forward(inputs)
-	print(outputs)
+	# learn neural network to output 1 if first input < second input and other way around for second output
+	for i in range(200):
+		var inputs = [rand_range(-1,1), rand_range(-1,1)]
+		# answer that should be given
+		var target = [0,0]
+		if inputs[0] < inputs[1]:
+			target = [1,0]
+		else:
+			target = [0,1]
+		
+		var outputs = n.feed_forward(inputs)
+		print(outputs == target) # print if guessed the right answer
+		n.train(inputs, target) # train
+#		print(outputs)

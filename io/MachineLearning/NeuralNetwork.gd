@@ -81,7 +81,8 @@ func train(inputs, targets):
 	# backpropagation #
 	
 	# calculate error: difference between output and target
-	var output_errors = targets.subtract(outputs) # note: not static, this changes targets matrix
+	var output_errors = targets
+	output_errors.subtract(outputs) # note: not static, this changes matrix
 	
 	# ToDo: loop over multiple hidden layers
 	# turn matrix for going backwards through neural network layers
@@ -91,21 +92,23 @@ func train(inputs, targets):
 	
 	# calculate delta's: amount weights should change by
 	# slope of activation function * errors * learningrate
-	var gradients_output = outputs.derivative()
+	var gradients_output = outputs.copy()
+	gradients_output.derivative()
 	gradients_output.multiply(output_errors)
 	gradients_output.multiply(learning_rate)
 	
 	# gradients for next layer
-	var gradients_hidden = hidden.derivative()
+	var gradients_hidden = hidden.copy()
+	gradients_hidden.derivative()
 	gradients_hidden.multiply(hidden_errors)
 	gradients_hidden.multiply(learning_rate)
 	
 	# change weights hidden to output layer
-	hidden.transpose() # turn for backwards
+	hidden = hidden.transpose() # turn for backwards
 	var weights_hidden_to_output_delta = Matrix.dot(gradients_output, hidden)
 	weights_hidden_to_output.add(weights_hidden_to_output_delta)
 	
 	# change weights input to hidden layer
-	inputs.transpose() # turn for backwards
+	inputs = inputs.transpose() # turn for backwards
 	var weights_input_to_hidden_delta = Matrix.dot(gradients_hidden, inputs)
 	weights_input_to_hidden.add(weights_input_to_hidden_delta)

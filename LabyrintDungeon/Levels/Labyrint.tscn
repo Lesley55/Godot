@@ -234,6 +234,7 @@
 script = ExtResource( 1 )
 maze_width = 6
 maze_height = 4
+watch_generation_process = true
 
 [node name="Loading" parent="." instance=ExtResource( 3 )]
 
@@ -246,5 +247,6 @@ format = 1
 anchor_mode = 0
 current = true
 zoom = Vector2( 2, 2 )
+
 [connection signal="layout_generated" from="." to="." method="_on_layout_generated"]
 [connection signal="map_generated" from="." to="." method="_on_map_generated"]

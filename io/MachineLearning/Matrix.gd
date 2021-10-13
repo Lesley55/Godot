@@ -36,7 +36,7 @@ func add(other):
 		# add number to all values in matrix
 		for i in rows:
 			for j in columns:
-				data[i][j] += other;
+				data[i][j] += other
 
 func subtract(other):
 	if other is Self: # if also a matrix
@@ -68,7 +68,7 @@ func transpose():
 	var result = Self.new(columns, rows)
 	for i in rows:
 		for j in columns:
-			result.data[i][j] = data[j][i]
+			result.data[j][i] = data[i][j]
 	return result
 
 # get dot product of / multiply two matrices
@@ -145,3 +145,11 @@ func derivative():
 			# math on internet says 1 minus, tutorial says 1 devided by, don't understand wich one is correct
 			data[i][j] = 1 - pow(tanh(data[i][j]), 2)
 #			data[i][j] = 1 / pow(tanh(data[i][j]), 2)
+
+func copy():
+	# create a copy of matrix
+	var result = Self.new(rows, columns)
+	for i in rows:
+		for j in columns:
+			result.data[i][j] = data[i][j]
+	return result

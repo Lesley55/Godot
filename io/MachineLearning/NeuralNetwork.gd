@@ -61,92 +61,52 @@ func feed_forward(arr):
 # supervised learning
 # adjust the weights based on the known answers of certain inputs
 func train(inputs, targets):
-	var layers_nodes_values = []
+	# turn array into matrix so i can perform matrix math
+	inputs = Matrix.from_array(inputs)
+	targets = Matrix.from_array(targets)
 	
-#	var outputs = feed_forward(inputs) # get outputs array
+	# values of each layer
+	var layers_nodes_values = []
+	layers_nodes_values.append(inputs) # inputs are values of first layer
 	
 	# litterally copied feed_forward function instead of using it
 	# because i need matrix values of the hidden layers to adjust the weights
-	inputs = Matrix.from_array(inputs)
-	var hidden = Matrix.dot(weights[0], inputs)
-	hidden.activation()
-	var outputs = Matrix.dot(weights[1], hidden)
-	outputs.activation()
-	
-#	var outputs = null
-#	for i in len(weights):
-#		outputs = Matrix.dot(weights[i], inputs)
-#		outputs.activation()
-#		inputs = outputs.copy()
-#		layers_nodes_values.append(outputs) # remember values of nodes
-	
-	# turn array into matrix so i can perform matrix math
-#	outputs = Matrix.from_array(outputs) # this step became unnecessary
-	targets = Matrix.from_array(targets)
+	var outputs = null
+	for i in len(weights):
+		outputs = Matrix.dot(weights[i], inputs)
+		outputs.activation()
+		inputs = outputs.copy()
+		layers_nodes_values.append(outputs) # remember values of nodes
 	
 	### backpropagation ###
 	
 	# calculate error: difference between output and target
-	var output_errors = targets
-	output_errors.subtract(outputs) # note: not static, this changes matrix
-
-	# ToDo: loop over multiple hidden layers
-	# turn matrix for going backwards through neural network layers
-	var weights_hidden_output_transposed = weights[1].transpose()
-	# calculate previous/hidden layer errors
-	var hidden_errors = Matrix.dot(weights_hidden_output_transposed, output_errors)
-
-	# calculate delta's: amount weights should change by
-	# slope of activation function * errors * learningrate
-	var gradients_output = outputs.copy()
-	gradients_output.derivative()
-	gradients_output.multiply(output_errors)
-	gradients_output.multiply(learning_rate)
-
-	# gradients for next layer
-	var gradients_hidden = hidden.copy()
-	gradients_hidden.derivative()
-	gradients_hidden.multiply(hidden_errors)
-	gradients_hidden.multiply(learning_rate)
-
-	# change weights hidden to output layer
-	hidden = hidden.transpose() # turn for backwards
-	var weights_hidden_to_output_delta = Matrix.dot(gradients_output, hidden)
-	weights[1].add(weights_hidden_to_output_delta)
-
-	# change weights input to hidden layer
-	inputs = inputs.transpose() # turn for backwards
-	var weights_input_to_hidden_delta = Matrix.dot(gradients_hidden, inputs)
-	weights[0].add(weights_input_to_hidden_delta)
+	var errors = targets
+	errors.subtract(outputs)
 	
-	
-#	# calculate error: difference between output and target
-#	var errors = targets
-#	errors.subtract(outputs)
-#
-#	# go backwards through the layers
-#	for i in range(len(weights) - 1, -1, -1):
-#		# calculate delta's: amount weights should change by
-#
-#		# slope of activation function at value of node * errors * learningrate
-#		var gradients = layers_nodes_values[i].copy()
-#		gradients.derivative()
-#		gradients.multiply(errors)
-#		gradients.multiply(learning_rate)
-#
-#		# turn matrix for going backwards through neural network layers
-#		var layer_nodes_values_transposed = layers_nodes_values[i].transpose()
-#		# use gradient to calculate delta using all connections to node
-#		var weights_delta = Matrix.dot(gradients, layer_nodes_values_transposed)
-#
-#		# change weights of layer
-#		weights[i].add(weights_delta)
-#
-#		# there is no known output/target for the nodes before the output that you can use tot change the weights,
-#		# node influences output by weight devided by total weights to that output
-#		# so you can calculate how much that previous node contributed to the current error
-#		# which you can use as the error of that node to continue backwards
-#		if i > 0:
-#			var weights_transposed = weights[i].transpose() # turn for backwards
-#			# calculate previous layer errors
-#			errors = Matrix.dot(weights_transposed, errors)
+	# go backwards through the layers
+	for i in range(len(weights) - 1, -1, -1):
+		# calculate delta's: amount weights should change by
+		
+		# slope of activation function at value of node * errors * learningrate
+		var gradients = layers_nodes_values[i+1].copy()
+		gradients.derivative()
+		gradients.multiply(errors)
+		gradients.multiply(learning_rate)
+		
+		# turn matrix for going backwards through neural network layers
+		var layer_nodes_values_transposed = layers_nodes_values[i].transpose()
+		# use gradient to calculate delta using all connections to node
+		var weights_delta = Matrix.dot(gradients, layer_nodes_values_transposed)
+		
+		# change weights of layer
+		weights[i].add(weights_delta)
+		
+		# there is no known output/target for the nodes before the output layer that you can use tot change the weights,
+		# node influences output by weight devided by total weights to that output
+		# so you can calculate how much that previous node contributed to the current error
+		# which you can use as the error of that node to continue backwards
+		if i > 0:
+			var weights_transposed = weights[i].transpose() # turn for backwards
+			# calculate previous layer errors
+			errors = Matrix.dot(weights_transposed, errors)

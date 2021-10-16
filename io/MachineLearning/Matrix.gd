@@ -10,9 +10,9 @@ var rows = 0
 var columns = 0
 
 # create matrix
-func _init(rows, columns):
-	self.rows = rows
-	self.columns = columns
+func _init(r, c):
+	rows = r
+	columns = c
 	# fill matrix with zero's
 	for i in rows:
 		data.append([])
@@ -142,9 +142,8 @@ func derivative():
 	for i in rows:
 		for j in columns:
 			# calculate slope of function tanh at x
-			# math on internet says 1 minus, tutorial says 1 devided by, don't understand wich one is correct
-			data[i][j] = 1 - pow(tanh(data[i][j]), 2)
-#			data[i][j] = 1 / pow(tanh(data[i][j]), 2)
+#			data[i][j] = 1 - pow(tanh(data[i][j]), 2)
+			data[i][j] = 1 / pow(cosh(data[i][j]), 2) # tutorial
 
 func copy():
 	# create a copy of matrix

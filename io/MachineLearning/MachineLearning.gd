@@ -17,7 +17,7 @@ func test_perceptron():
 	print(p.weights)
 	print("train perceptron")
 	# learn perceptron to output 1 if first input < second input
-	for i in range(200):
+	for _i in range(200):
 		# random inputs
 		var inputs = [rand_range(-1,1), rand_range(-1,1)]
 		# answer that should be given
@@ -27,6 +27,7 @@ func test_perceptron():
 		else:
 			target = -1
 		var g = p.guess(inputs)
+#		print(target, g)
 		print(g == target) # print if guessed the right answer
 		p.train(inputs, target) # train
 #		print(p.weights)
@@ -83,18 +84,24 @@ func test_matrix():
 
 func test_neural_network():
 	print("train neural network")
-	var n = NeuralNetwork.new(2,2,1)
+	var n = NeuralNetwork.new([2,5,2])
 	# learn neural network to output 1 if first input < second input and other way around for second output
-	for i in range(200):
+	for _i in range(400):
 		var inputs = [rand_range(-1,1), rand_range(-1,1)]
 		# answer that should be given
-		var target = [0]
+		var target = [0,0]
 		if inputs[0] < inputs[1]:
-			target = [1]
+			target = [1,-1]
 		else:
-			target = [-1]
+			target = [-1,1]
 		
 		var outputs = n.feed_forward(inputs)
-#		print(outputs == target) # print if guessed the right answer
-		n.train(inputs, target) # train
+		
+		yield(get_tree(),"idle_frame") # wait a frame, so i can see al prints, no overflow in console
 		print(target, outputs)
+		
+#		for o in len(outputs):
+#			outputs[o] = sign(outputs[o])
+#		print(outputs[0] == target[0])
+		
+		n.train(inputs, target) # train

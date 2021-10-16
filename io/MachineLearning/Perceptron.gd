@@ -15,7 +15,7 @@ const bias = 1
 func _init(n): # n amount of inputs
 	randomize() # set randomizer seed
 	# random weight for every input
-	for i in range(n + 1): # +1 weight for the bias
+	for _i in range(n + 1): # +1 weight for the bias
 		weights.append(rand_range(-1, 1))
 
 # use inputs and their weights to guess the outcome

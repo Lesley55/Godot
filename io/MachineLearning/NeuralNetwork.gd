@@ -10,15 +10,12 @@ var Matrix = load("res://MachineLearning/Matrix.gd")
 # number of nodes in each layer
 var number_of_nodes = []
 
-# matrix of weights for connections between nodes
-var weights_input_to_hidden = null
-var weights_hidden_to_output = null
+# matrices of weights for connections between nodes
+var weights = []
 
 ## matrix of weights for bias connections
 #var weights_bias_hidden = null
 #var weights_bias_output = null
-
-var weights = []
 
 var learning_rate = 0.1 # decide size of adjustments, if bigger, learns faster, but will also overshoot more
 
@@ -26,12 +23,6 @@ var learning_rate = 0.1 # decide size of adjustments, if bigger, learns faster, 
 func _init(array):
 	# number of nodes in each layer
 	number_of_nodes = array
-	
-	# give a weight for every connection
-	weights_input_to_hidden = Matrix.new(number_of_nodes[1], number_of_nodes[0])
-	weights_hidden_to_output = Matrix.new(number_of_nodes[2], number_of_nodes[1])
-	weights_input_to_hidden.random()
-	weights_hidden_to_output.random()
 	
 	# give a weight for every connection between the nodes of the layers
 	for i in range(len(number_of_nodes) - 1):
@@ -54,22 +45,15 @@ func feed_forward(arr):
 	
 	# ToDo: bias
 	
-	# hidden value is weighted sum of all inputs times weights
-	var hidden = Matrix.dot(weights_input_to_hidden, inputs)
-	# let outputs of the hidden layer pass through activation function
-	hidden.activation()
-
-	# output value is weighted sum of all hidden values times weights
-	var outputs = Matrix.dot(weights_hidden_to_output, hidden)
-	# let outputs of the output layer pass through activation function
-	outputs.activation()
-	
-#	# weighted sum of inputs current layer and weights to next layer, gives the output/value of nodes in next layer
-#	var outputs = null
-#	for i in len(weights):
-#		outputs = Matrix.dot(weights[i], inputs)
-#		outputs.activation()
-#		inputs = outputs.copy() # output of current layer is used as input for next layer
+	# weighted sum of inputs current layer and weights to next layer, gives the output/value of nodes in next layer
+	var outputs = null
+	for i in len(weights):
+		# weighted sum of all inputs times weights
+		outputs = Matrix.dot(weights[i], inputs)
+		# let outputs pass through activation function
+		outputs.activation()
+		# output of current layer is used as input for next layer
+		inputs = outputs.copy()
 	
 	# return outputs (values of last layer)
 	return outputs.to_array()
@@ -84,9 +68,9 @@ func train(inputs, targets):
 	# litterally copied feed_forward function instead of using it
 	# because i need matrix values of the hidden layers to adjust the weights
 	inputs = Matrix.from_array(inputs)
-	var hidden = Matrix.dot(weights_input_to_hidden, inputs)
+	var hidden = Matrix.dot(weights[0], inputs)
 	hidden.activation()
-	var outputs = Matrix.dot(weights_hidden_to_output, hidden)
+	var outputs = Matrix.dot(weights[1], hidden)
 	outputs.activation()
 	
 #	var outputs = null
@@ -108,7 +92,7 @@ func train(inputs, targets):
 
 	# ToDo: loop over multiple hidden layers
 	# turn matrix for going backwards through neural network layers
-	var weights_hidden_output_transposed = weights_hidden_to_output.transpose()
+	var weights_hidden_output_transposed = weights[1].transpose()
 	# calculate previous/hidden layer errors
 	var hidden_errors = Matrix.dot(weights_hidden_output_transposed, output_errors)
 
@@ -128,12 +112,12 @@ func train(inputs, targets):
 	# change weights hidden to output layer
 	hidden = hidden.transpose() # turn for backwards
 	var weights_hidden_to_output_delta = Matrix.dot(gradients_output, hidden)
-	weights_hidden_to_output.add(weights_hidden_to_output_delta)
+	weights[1].add(weights_hidden_to_output_delta)
 
 	# change weights input to hidden layer
 	inputs = inputs.transpose() # turn for backwards
 	var weights_input_to_hidden_delta = Matrix.dot(gradients_hidden, inputs)
-	weights_input_to_hidden.add(weights_input_to_hidden_delta)
+	weights[0].add(weights_input_to_hidden_delta)
 	
 	
 #	# calculate error: difference between output and target

@@ -4,6 +4,9 @@ var amplitude = 0
 var priority = 0
 
 onready var camera = get_parent()
+onready var duration = $Duration
+onready var frequency = $Frequency
+onready var shakeTween = $ShakeTween
 
 # frequency = shakes per second
 # amplitude = amount of pixels the screen can shake to both sides
@@ -12,10 +15,10 @@ func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
 		self.amplitude = amplitude
 		self.priority = priority
 		
-		$Duration.wait_time = duration
-		$Frequency.wait_time = 1 / float(frequency)
-		$Duration.start()
-		$Frequency.start()
+		duration.wait_time = duration
+		frequency.wait_time = 1 / float(frequency)
+		duration.start()
+		frequency.start()
 		
 		_new_shake()
 
@@ -24,12 +27,12 @@ func _new_shake():
 	rand.x = rand_range(-amplitude, amplitude)
 	rand.y = rand_range(-amplitude, amplitude)
 	
-	$ShakeTween.interpolate_property(camera, "offset", camera.offset, rand, $Frequency.wait_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$ShakeTween.start()
+	shakeTween.interpolate_property(camera, "offset", camera.offset, rand, frequency.wait_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	shakeTween.start()
 
 func _reset():
-	$ShakeTween.interpolate_property(camera, "offset", camera.offset, Vector2.ZERO, $Frequency.wait_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
-	$ShakeTween.start()
+	shakeTween.interpolate_property(camera, "offset", camera.offset, Vector2.ZERO, frequency.wait_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	shakeTween.start()
 	
 	priority = 0
 
@@ -38,4 +41,4 @@ func _on_Frequency_timeout():
 
 func _on_Duration_timeout():
 	_reset()
-	$Frequency.stop()
+	frequency.stop()

@@ -86,7 +86,7 @@ func test_neural_network():
 	print("train neural network")
 	var n = NeuralNetwork.new([2,6,6,2])
 	# learn neural network to output 1 if first input < second input and other way around for second output
-	for _i in range(400):
+	for _i in range(300):
 		var inputs = [rand_range(-1,1), rand_range(-1,1)]
 		# answer that should be given
 		var target = [0,0]
@@ -97,8 +97,8 @@ func test_neural_network():
 		
 		var outputs = n.feed_forward(inputs)
 		
-		yield(get_tree(),"idle_frame") # wait a frame, so i can see al prints, no overflow in console
 		print(target, outputs)
+		yield(get_tree(),"idle_frame") # wait a frame, so i can see al prints, no overflow in console
 		
 #		for o in len(outputs):
 #			outputs[o] = sign(outputs[o])

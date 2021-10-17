@@ -1,5 +1,6 @@
 extends Node2D
 
+# should be const but can't, because need to load the scene so it changes in the beginning
 var FOOD = preload("res://Food/Food.tscn")
 var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
 var PLAYER = preload("res://Characters/Player/Player.tscn")

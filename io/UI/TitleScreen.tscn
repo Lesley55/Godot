@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 theme = ExtResource( 5 )
 script = ExtResource( 4 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -29,6 +30,7 @@ rect_pivot_offset = Vector2( 184.022, 334.491 )
 texture = ExtResource( 1 )
 stretch_mode = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -37,16 +39,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -360.0
-margin_top = -181.0
-margin_right = 138.0
-margin_bottom = 245.0
+margin_left = -356.0
+margin_top = -192.0
+margin_right = 142.0
+margin_bottom = 234.0
 alignment = 1
 color = Color( 0, 0, 1, 1 )
 edit_alpha = false
 presets_enabled = false
 presets_visible = false
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -56,10 +59,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 183.0
-margin_top = -143.5
+margin_top = -149.5
 margin_right = 425.0
-margin_bottom = 143.5
+margin_bottom = 137.5
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

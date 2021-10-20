@@ -89,8 +89,18 @@ func train(inputs, targets):
 	### backpropagation ###
 	
 	# calculate error: difference between output and target
-	var errors = targets
-	errors.subtract(outputs)
+	var errors = [targets]
+	errors[0].subtract(outputs)
+	
+	# go backwards through the layers to calculate the errors
+	for i in range(len(_weights) - 1, 0, -1):
+		# there is no known output/target for the nodes before the output layer that you can use tot change the weights,
+		# node influences output by weight devided by total weights to that output
+		# so you can calculate how much that previous node contributed to the current error
+		# which you can use as the error of that node
+		var weights_transposed = _weights[i].transpose() # turn for backwards
+		# calculate previous layer errors
+		errors.push_front(Matrix.dot(weights_transposed, errors[0]))
 	
 	# go backwards through the layers
 	for i in range(len(_weights) - 1, -1, -1):
@@ -99,7 +109,7 @@ func train(inputs, targets):
 		# slope of activation function at value of node * errors * learningrate
 		var gradients = layers_nodes_values[i+1].copy()
 		gradients.derivative()
-		gradients.multiply(errors)
+		gradients.multiply(errors[i])
 		gradients.multiply(learning_rate)
 		
 		# turn matrix for going backwards through neural network layers
@@ -111,12 +121,3 @@ func train(inputs, targets):
 		_weights[i].add(weights_delta)
 		# change biases by deltas: just the gradients
 		_biases[i].add(gradients)
-		
-		# there is no known output/target for the nodes before the output layer that you can use tot change the weights,
-		# node influences output by weight devided by total weights to that output
-		# so you can calculate how much that previous node contributed to the current error
-		# which you can use as the error of that node to continue backwards
-		if i > 0:
-			var weights_transposed = _weights[i].transpose() # turn for backwards
-			# calculate previous layer errors
-			errors = Matrix.dot(weights_transposed, errors)

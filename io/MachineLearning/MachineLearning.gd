@@ -84,9 +84,9 @@ func test_matrix():
 
 func test_neural_network():
 	print("train neural network")
-	var n = NeuralNetwork.new([2,4,1])
+	var n = NeuralNetwork.new([2,16,16,16,1])
 	# learn neural network to output 1 if first input < second input and other way around for second output
-	for _i in range(400):
+	for _i in range(4000):
 		var inputs = [rand_range(-1,1), rand_range(-1,1)]
 		# answer that should be given
 		var target = [0,0]

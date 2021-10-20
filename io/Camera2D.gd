@@ -2,7 +2,7 @@ extends Camera2D
 
 var playerOrbs = []
 
-func _process(delta):
+func _process(_delta):
 	# amount of orbs can vary, so need to get them every time
 	playerOrbs = get_tree().get_nodes_in_group("player")
 	

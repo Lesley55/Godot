@@ -7,7 +7,7 @@
 [ext_resource path="res://Characters/Enemy/States/Wander.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 640, 360 )
+extents = Vector2( 540, 300 )
 
 [node name="Enemy" groups=[
 "enemy",

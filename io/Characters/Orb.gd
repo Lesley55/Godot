@@ -91,7 +91,7 @@ func shrink():
 		# reduce size more when bigger, so won't be able to get infinitely bigger.
 		size *= (100 - size / 1000) / 100
 
-func split(delta):
+func split(delta): # todo: use delta
 	# can't split infinitely smaller need to be at least bigger than starting size
 	if size > 1.2:
 		# loose some size for using, then half size

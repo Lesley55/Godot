@@ -2,5 +2,7 @@
 
 [ext_resource path="res://AutoLoad/PlayerData.gd" type="Script" id=1]
 
-[node name="PlayerData" type="Node"]
+[node name="PlayerData" type="Node" groups=[
+"save",
+]]
 script = ExtResource( 1 )

@@ -9,12 +9,10 @@ var color = Color8(0,0,255,255) # blauw
 var playerName = "name" setget set_name
 var score = 0 setget set_score
 
-var nn = NeuralNetwork.new([4,12,8,2]) # neural network
+var nn = NeuralNetwork.new([4,16,16,2]) # neural network
 var nn_inputs = [] # data about playfield and player to use as input for neural network
 
 func reset():
-	color = Color8(0,0,255,255)
-	playerName = "name"
 	score = 0
 
 func set_name(value: String):
@@ -38,4 +36,11 @@ func set_nn_inputs(data):
 func die(elapsed_time):
 	var targets = [score, elapsed_time]
 	nn.train(nn_inputs, targets)
+	
 	emit_signal("player_died")
+
+func save():
+	return nn.to_dict()
+
+func load_data(data):
+	nn = NeuralNetwork.from_dict(data)

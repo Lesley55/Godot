@@ -20,8 +20,8 @@ func _ready():
 	randomize()
 	width = rand_range(5000, 15000)
 	height = rand_range(5000, 15000)
-	amount_of_food = rand_range(500, 2500)
-	amount_of_enemies = rand_range(5, 40)
+	amount_of_food = rand_range(500, 2000)
+	amount_of_enemies = rand_range(5, 25)
 	# save data to use as input for neural network
 	PlayerData.set_nn_inputs([width, height, amount_of_food, amount_of_enemies])
 	
@@ -47,7 +47,7 @@ func _ready():
 	polygon.set(4, Vector2(-width/2, -height/2))
 	border.set_polygon(polygon)
 
-func _process(delta):
+func _process(_delta):
 	# maybe replace by resetting and changing position, for performance, instead of deleting and adding node?
 	if len(get_tree().get_nodes_in_group("food")) < amount_of_food:
 #	if get_child_count() < amount_of_food: # almost same amount but might be more performant? idk

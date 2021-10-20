@@ -7,7 +7,7 @@ class_name NeuralNetwork
 
 var Matrix = load("res://MachineLearning/Matrix.gd")
 
-var number_of_nodes = [] # number of nodes in each layer
+var _number_of_nodes = [] # number of nodes in each layer
 
 # matrices of weights
 var _weights = [] # weights/connections between nodes
@@ -18,17 +18,17 @@ var learning_rate = 0.1 # decide size of adjustments, if bigger, learns faster, 
 # shape the neural network
 func _init(array):
 	# number of nodes in each layer
-	number_of_nodes = array
+	_number_of_nodes = array
 	
 	# give a weight for every connection between the nodes of the layers
-	for i in range(len(number_of_nodes) - 1):
+	for i in range(len(_number_of_nodes) - 1):
 		# new weight matrix based on size of current and next layer
-		var weights_to_next_layer = Matrix.new(number_of_nodes[i+1], number_of_nodes[i])
+		var weights_to_next_layer = Matrix.new(_number_of_nodes[i+1], _number_of_nodes[i])
 		weights_to_next_layer.random() # give a random weight
 		_weights.append(weights_to_next_layer) # add to weights array
 		
 		# new bias matrix based on size of next layer
-		var bias_weights = Matrix.new(number_of_nodes[i+1], 1)
+		var bias_weights = Matrix.new(_number_of_nodes[i+1], 1)
 		bias_weights.random() # give a random weight
 		_biases.append(bias_weights) # add to bias weights array
 
@@ -36,7 +36,7 @@ func _init(array):
 # do the same with the value of previous layer for every layer in the neural network
 func feed_forward(arr):
 	# error handling
-	if len(arr) != number_of_nodes[0]:
+	if len(arr) != _number_of_nodes[0]:
 		print("amount of inputs should equal that of neural network")
 		return
 	
@@ -63,7 +63,7 @@ func feed_forward(arr):
 # adjust the weights based on the known answers of certain inputs
 func train(inputs, targets):
 	# error handling
-	if len(inputs) != number_of_nodes[0] or len(targets) != number_of_nodes[-1]:
+	if len(inputs) != _number_of_nodes[0] or len(targets) != _number_of_nodes[-1]:
 		print("amount of inputs and targets(outputs) should equal that of neural network")
 		return
 	
@@ -100,12 +100,12 @@ func train(inputs, targets):
 		# which you can use as the error of that node
 		var weights_transposed = _weights[i].transpose() # turn for backwards
 		# calculate previous layer errors
-		errors.push_front(Matrix.dot(weights_transposed, errors[0]))
+		var prev_errors = Matrix.dot(weights_transposed, errors[0])
+		# add errors to beginning of array, because we need them to stand backwards
+		errors.push_front(prev_errors)
 	
-	# go backwards through the layers
+	# go backwards through the layers to calculate delta's: amount weights should change by
 	for i in range(len(_weights) - 1, -1, -1):
-		# calculate delta's: amount weights should change by
-		
 		# slope of activation function at value of node * errors * learningrate
 		var gradients = layers_nodes_values[i+1].copy()
 		gradients.derivative()
@@ -121,3 +121,54 @@ func train(inputs, targets):
 		_weights[i].add(weights_delta)
 		# change biases by deltas: just the gradients
 		_biases[i].add(gradients)
+
+# turn all classes into array/dictionary data, so we can save it as json
+func to_dict():
+	var dict = {} # new dictionary
+	dict["number_of_nodes"] = _number_of_nodes
+	
+	var weights_array = []
+	for i in _weights:
+		var matrix = {}
+		matrix["rows"] = i.rows
+		matrix["columns"] = i.columns
+		matrix["data"] = i.data
+		weights_array.append(matrix)
+	dict["weights"] = weights_array
+	
+	var biases_array = []
+	for i in _biases:
+		var matrix = {}
+		matrix["rows"] = i.rows
+		matrix["columns"] = i.columns
+		matrix["data"] = i.data
+		biases_array.append(matrix)
+	dict["biases"] = biases_array
+	
+	dict["learning_rate"] = learning_rate
+	
+	return dict
+
+static func from_dict(data):
+	# workaround
+	var Matrix = load("res://MachineLearning/Matrix.gd")
+	var Self = load("res://MachineLearning/NeuralNetwork.gd")
+	
+	var nn = Self.new(data["number_of_nodes"]) # new neural network
+	
+	# get matrices
+	var weights_array = data["weights"]
+	for i in len(weights_array):
+		var matrix = Matrix.new(weights_array[i]["rows"], weights_array[i]["columns"])
+		matrix.data = weights_array[i]["data"]
+		nn._weights[i] = matrix # bad code, accessing (what should be) a private var
+	
+	var biases_array = data["biases"]
+	for i in len(biases_array):
+		var matrix = Matrix.new(biases_array[i]["rows"], biases_array[i]["columns"])
+		matrix.data = biases_array[i]["data"]
+		nn._biases[i] = matrix # bad code, accessing (what should be) a private var
+	
+	nn.learning_rate = data["learning_rate"]
+	
+	return nn

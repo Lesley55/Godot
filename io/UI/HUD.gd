@@ -26,7 +26,7 @@ func _on_PlayerData_player_died():
 	# wait then show overlay
 	yield(get_tree().create_timer(1), "timeout")
 	overlay.visible = true
-	PlayerData.reset() # needs to go somewhere else
+	PlayerData.reset() # needs to go somewhere else, hud shouldn't be responsible for this
 
 func update_interface():
 	score.text = "Score: %s" % PlayerData.score

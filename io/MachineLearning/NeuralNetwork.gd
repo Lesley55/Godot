@@ -35,6 +35,11 @@ func _init(array):
 # use inputs to calculate the values of the nodes in the next layer
 # do the same with the value of previous layer for every layer in the neural network
 func feed_forward(arr):
+	# error handling
+	if len(arr) != number_of_nodes[0]:
+		print("amount of inputs should equal that of neural network")
+		return
+	
 	# turn inputs array into matrix
 	var inputs = Matrix.from_array(arr)
 	
@@ -46,7 +51,8 @@ func feed_forward(arr):
 		# add bias (instead of creating a new bias input node and then using the bias + weights dot product, just straight up add the biases
 		outputs.add(biases[i])
 		# let outputs pass through activation function
-		outputs.activation()
+		if i != len(weights) - 1: # all layers except output
+			outputs.activation()
 		# output of current layer is used as input for next layer
 		inputs = outputs.copy()
 	
@@ -56,6 +62,11 @@ func feed_forward(arr):
 # supervised learning
 # adjust the weights based on the known answers of certain inputs
 func train(inputs, targets):
+	# error handling
+	if len(inputs) != number_of_nodes[0] or len(targets) != number_of_nodes[-1]:
+		print("amount of inputs and targets(outputs) should equal that of neural network")
+		return
+	
 	# turn array into matrix so i can perform matrix math
 	inputs = Matrix.from_array(inputs)
 	targets = Matrix.from_array(targets)
@@ -70,7 +81,8 @@ func train(inputs, targets):
 	for i in len(weights):
 		outputs = Matrix.dot(weights[i], inputs)
 		outputs.add(biases[i])
-		outputs.activation()
+		if i != len(weights) - 1:
+			outputs.activation()
 		inputs = outputs.copy()
 		layers_nodes_values.append(outputs) # remember values of layer nodes
 	

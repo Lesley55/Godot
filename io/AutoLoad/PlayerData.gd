@@ -1,11 +1,16 @@
 extends Node
 
+var NeuralNetwork = load("res://MachineLearning/NeuralNetwork.gd")
+
 signal score_updated
 signal player_died
 
 var color = Color8(0,0,255,255) # blauw
 var playerName = "name" setget set_name
 var score = 0 setget set_score
+
+var nn = NeuralNetwork.new([4,12,8,2]) # neural network
+var nn_inputs = [] # data about playfield and player to use as input for neural network
 
 func reset():
 	color = Color8(0,0,255,255)
@@ -26,5 +31,11 @@ func set_score(value: int):
 		score = 0
 	emit_signal("score_updated")
 
-func die():
+func set_nn_inputs(data):
+	nn_inputs = data # width, height, amount of food and amount of enemies
+	print(nn.feed_forward(nn_inputs))
+
+func die(elapsed_time):
+	var targets = [score, elapsed_time]
+	nn.train(nn_inputs, targets)
 	emit_signal("player_died")

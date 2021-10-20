@@ -84,24 +84,20 @@ func test_matrix():
 
 func test_neural_network():
 	print("train neural network")
-	var n = NeuralNetwork.new([2,6,6,2])
+	var n = NeuralNetwork.new([2,4,1])
 	# learn neural network to output 1 if first input < second input and other way around for second output
-	for _i in range(300):
+	for _i in range(400):
 		var inputs = [rand_range(-1,1), rand_range(-1,1)]
 		# answer that should be given
 		var target = [0,0]
 		if inputs[0] < inputs[1]:
-			target = [1,-1]
+			target = [-1]
 		else:
-			target = [-1,1]
+			target = [1]
 		
 		var outputs = n.feed_forward(inputs)
 		
 		print(target, outputs)
 		yield(get_tree(),"idle_frame") # wait a frame, so i can see al prints, no overflow in console
-		
-#		for o in len(outputs):
-#			outputs[o] = sign(outputs[o])
-#		print(outputs[0] == target[0])
 		
 		n.train(inputs, target) # train

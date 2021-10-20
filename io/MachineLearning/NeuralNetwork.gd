@@ -10,8 +10,8 @@ var Matrix = load("res://MachineLearning/Matrix.gd")
 var number_of_nodes = [] # number of nodes in each layer
 
 # matrices of weights
-var weights = [] # weights/connections between nodes
-var biases = [] # weights for biases
+var _weights = [] # weights/connections between nodes
+var _biases = [] # weights for biases
 
 var learning_rate = 0.1 # decide size of adjustments, if bigger, learns faster, but will also overshoot more
 
@@ -25,12 +25,12 @@ func _init(array):
 		# new weight matrix based on size of current and next layer
 		var weights_to_next_layer = Matrix.new(number_of_nodes[i+1], number_of_nodes[i])
 		weights_to_next_layer.random() # give a random weight
-		weights.append(weights_to_next_layer) # add to weights array
+		_weights.append(weights_to_next_layer) # add to weights array
 		
 		# new bias matrix based on size of next layer
 		var bias_weights = Matrix.new(number_of_nodes[i+1], 1)
 		bias_weights.random() # give a random weight
-		biases.append(bias_weights) # add to bias weights array
+		_biases.append(bias_weights) # add to bias weights array
 
 # use inputs to calculate the values of the nodes in the next layer
 # do the same with the value of previous layer for every layer in the neural network
@@ -45,13 +45,13 @@ func feed_forward(arr):
 	
 	# weighted sum of inputs current layer and weights to next layer, gives the output/value of nodes in next layer
 	var outputs = null
-	for i in len(weights):
+	for i in len(_weights):
 		# weighted sum of all inputs times weights
-		outputs = Matrix.dot(weights[i], inputs)
+		outputs = Matrix.dot(_weights[i], inputs)
 		# add bias (instead of creating a new bias input node and then using the bias + weights dot product, just straight up add the biases
-		outputs.add(biases[i])
+		outputs.add(_biases[i])
 		# let outputs pass through activation function
-		if i != len(weights) - 1: # all layers except output
+		if i != len(_weights) - 1: # all layers except output
 			outputs.activation()
 		# output of current layer is used as input for next layer
 		inputs = outputs.copy()
@@ -78,10 +78,10 @@ func train(inputs, targets):
 	# litterally copied feed_forward function instead of using it
 	# because i need matrix values of the hidden layers to adjust the weights
 	var outputs = null
-	for i in len(weights):
-		outputs = Matrix.dot(weights[i], inputs)
-		outputs.add(biases[i])
-		if i != len(weights) - 1:
+	for i in len(_weights):
+		outputs = Matrix.dot(_weights[i], inputs)
+		outputs.add(_biases[i])
+		if i != len(_weights) - 1:
 			outputs.activation()
 		inputs = outputs.copy()
 		layers_nodes_values.append(outputs) # remember values of layer nodes
@@ -93,7 +93,7 @@ func train(inputs, targets):
 	errors.subtract(outputs)
 	
 	# go backwards through the layers
-	for i in range(len(weights) - 1, -1, -1):
+	for i in range(len(_weights) - 1, -1, -1):
 		# calculate delta's: amount weights should change by
 		
 		# slope of activation function at value of node * errors * learningrate
@@ -108,15 +108,15 @@ func train(inputs, targets):
 		var weights_delta = Matrix.dot(gradients, layer_nodes_values_transposed)
 		
 		# change weights of layer
-		weights[i].add(weights_delta)
+		_weights[i].add(weights_delta)
 		# change biases by deltas: just the gradients
-		biases[i].add(gradients)
+		_biases[i].add(gradients)
 		
 		# there is no known output/target for the nodes before the output layer that you can use tot change the weights,
 		# node influences output by weight devided by total weights to that output
 		# so you can calculate how much that previous node contributed to the current error
 		# which you can use as the error of that node to continue backwards
 		if i > 0:
-			var weights_transposed = weights[i].transpose() # turn for backwards
+			var weights_transposed = _weights[i].transpose() # turn for backwards
 			# calculate previous layer errors
 			errors = Matrix.dot(weights_transposed, errors)

@@ -5,15 +5,26 @@ var FOOD = preload("res://Food/Food.tscn")
 var ENEMY = preload("res://Characters/Enemy/Enemy.tscn")
 var PLAYER = preload("res://Characters/Player/Player.tscn")
 
-# export var can be overwritten in editor
-export(int, 5000, 20000, 100) var width = 10000
-export(int, 5000, 20000, 100) var height = 10000
-var size = 100000
+var width = 10000
+var height = 10000
+var size = 100000000
+
+var amount_of_food = 1000
+var amount_of_enemies = 20
 
 onready var bg = $background
 onready var border = $Border/CollisionPolygon2D
 
 func _ready():
+	# randomize values
+	randomize()
+	width = rand_range(5000, 15000)
+	height = rand_range(5000, 15000)
+	amount_of_food = rand_range(500, 2500)
+	amount_of_enemies = rand_range(5, 40)
+	# save data to use as input for neural network
+	PlayerData.set_nn_inputs([width, height, amount_of_food, amount_of_enemies])
+	
 	# get background size
 	bg.region_rect.size.x = width
 	bg.region_rect.size.y = height
@@ -21,10 +32,10 @@ func _ready():
 	
 	_spawn(PLAYER)
 	
-	for i in size/100000:
+	for i in amount_of_food:
 		_spawn(FOOD)
 	
-	for i in size/5000000:
+	for i in amount_of_enemies:
 		_spawn(ENEMY)
 	
 	# update border polygon to match playfield(bg) size
@@ -38,11 +49,11 @@ func _ready():
 
 func _process(delta):
 	# maybe replace by resetting and changing position, for performance, instead of deleting and adding node?
-	if len(get_tree().get_nodes_in_group("food")) < size/100000:
-#	if get_child_count() < size/100000: # almost same but might be more performant?
+	if len(get_tree().get_nodes_in_group("food")) < amount_of_food:
+#	if get_child_count() < amount_of_food: # almost same amount but might be more performant? idk
 		_spawn(FOOD)
 	
-	if len(get_tree().get_nodes_in_group("enemy")) < size/5000000:
+	if len(get_tree().get_nodes_in_group("enemy")) < amount_of_enemies:
 		_spawn(ENEMY)
 
 func _spawn(node):

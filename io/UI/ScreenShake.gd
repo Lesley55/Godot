@@ -15,10 +15,10 @@ func start(duration = 0.2, frequency = 15, amplitude = 16, priority = 0):
 		self.amplitude = amplitude
 		self.priority = priority
 		
-		duration.wait_time = duration
-		frequency.wait_time = 1 / float(frequency)
-		duration.start()
-		frequency.start()
+		self.duration.wait_time = duration
+		self.frequency.wait_time = 1 / float(frequency)
+		self.duration.start()
+		self.frequency.start()
 		
 		_new_shake()
 

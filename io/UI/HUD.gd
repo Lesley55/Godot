@@ -2,6 +2,7 @@ extends Control
 
 signal screen_shake()
 
+onready var expected = $Expected
 onready var score = $Score
 onready var overlay = $Overlay
 onready var leaderboard = $Overlay/Leaderboard
@@ -30,3 +31,4 @@ func _on_PlayerData_player_died():
 
 func update_interface():
 	score.text = "Score: %s" % PlayerData.score
+	expected.text = "neural network expects\nscore %s\nsurvival time %s" % PlayerData.nn_outputs

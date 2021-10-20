@@ -11,6 +11,7 @@ var score = 0 setget set_score
 
 var nn = NeuralNetwork.new([4,16,16,2]) # neural network
 var nn_inputs = [] # data about playfield and player to use as input for neural network
+var nn_outputs = [0,0]
 
 func reset():
 	score = 0
@@ -31,7 +32,7 @@ func set_score(value: int):
 
 func set_nn_inputs(data):
 	nn_inputs = data # width, height, amount of food and amount of enemies
-	print(nn.feed_forward(nn_inputs))
+	nn_outputs = nn.feed_forward(nn_inputs)
 
 func die(elapsed_time):
 	var targets = [score, elapsed_time]

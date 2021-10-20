@@ -16,6 +16,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Expected" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 319.0
+margin_bottom = 18.0
+text = "neural network expects
+score %s
+survival time %s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Score" type="Label" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 anchor_left = 1.0

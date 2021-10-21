@@ -35,7 +35,8 @@ margin_left = -323.0
 margin_top = 5.0
 margin_right = -4.0
 margin_bottom = 23.0
-text = "Score: %s"
+text = "Score: %s
+Time: %s"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,8 +45,8 @@ __meta__ = {
 [node name="Overlay" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 0.374573
-margin_bottom = 0.374573
+margin_top = 1.87288
+margin_bottom = 1.87286
 color = Color( 0, 0, 0, 0.235294 )
 __meta__ = {
 "_edit_use_anchors_": false

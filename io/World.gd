@@ -22,8 +22,8 @@ func _ready():
 	height = rand_range(5000, 15000)
 	amount_of_food = rand_range(500, 2000)
 	amount_of_enemies = rand_range(5, 25)
-	# save data to use as input for neural network
-	PlayerData.set_nn_inputs([width, height, amount_of_food, amount_of_enemies])
+	# save data to use as input for neural network # devided by max to get a relative value between 0 and 1
+	PlayerData.set_nn_inputs([width/15000, height/15000, amount_of_food/2000, amount_of_enemies/25])
 	
 	# get background size
 	bg.region_rect.size.x = width

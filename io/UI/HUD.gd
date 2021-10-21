@@ -15,6 +15,8 @@ func _ready():
 	# connect signals
 	PlayerData.connect("score_updated", self, "update_interface")
 	PlayerData.connect("player_died", self, "_on_PlayerData_player_died")
+
+func _process(delta):
 	# update player score
 	update_interface()
 
@@ -30,5 +32,5 @@ func _on_PlayerData_player_died():
 	PlayerData.reset() # needs to go somewhere else, hud shouldn't be responsible for this
 
 func update_interface():
-	score.text = "Score: %s" % PlayerData.score
+	score.text = "Score: %s\nTime: %s" % [PlayerData.score, PlayerData.elapsed_time]
 	expected.text = "neural network expects\nscore %s\nsurvival time %s" % PlayerData.nn_outputs

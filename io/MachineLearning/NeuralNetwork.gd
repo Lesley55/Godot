@@ -51,8 +51,7 @@ func feed_forward(arr):
 		# add bias (instead of creating a new bias input node and then using the bias + weights dot product, just straight up add the biases
 		outputs.add(_biases[i])
 		# let outputs pass through activation function
-		if i != len(_weights) - 1: # all layers except output
-			outputs.activation()
+		outputs.activation()
 		# output of current layer is used as input for next layer
 		inputs = outputs.copy()
 	
@@ -81,8 +80,7 @@ func train(inputs, targets):
 	for i in len(_weights):
 		outputs = Matrix.dot(_weights[i], inputs)
 		outputs.add(_biases[i])
-		if i != len(_weights) - 1:
-			outputs.activation()
+		outputs.activation()
 		inputs = outputs.copy()
 		layers_nodes_values.append(outputs) # remember values of layer nodes
 	

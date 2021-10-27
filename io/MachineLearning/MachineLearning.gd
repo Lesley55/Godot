@@ -7,8 +7,8 @@ var NeuralNetwork = load("res://MachineLearning/NeuralNetwork.gd")
 # not used in game, only for testing
 
 func _ready():
-#	test_perceptron()
-#	test_matrix()
+	test_perceptron()
+	test_matrix()
 	test_neural_network()
 
 func test_perceptron():

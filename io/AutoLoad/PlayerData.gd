@@ -13,7 +13,7 @@ var nn = NeuralNetwork.new([4,4,2]) # neural network
 var nn_inputs = [] setget set_nn_inputs # data about playfield and player to use as input for neural network
 var nn_outputs = [0,0]
 
-var _elapsed_time setget set_time
+var _elapsed_time = 0 setget set_time
 
 const MAX_SCORE = 100000
 const MAX_TIME = 600 # 10 min
@@ -39,14 +39,14 @@ func set_nn_inputs(data):
 	nn_inputs = data # width, height, amount of food and amount of enemies, devided by max for a relative value
 	nn_outputs = nn.feed_forward(nn_inputs)
 	# nn returns relative value between -1 and 1, return to normal value
-	nn_outputs[0] *= MAX_SCORE
-	nn_outputs[1] *= MAX_TIME
+	nn_outputs[0] = (nn_outputs[0] + 1) / 2 * MAX_SCORE
+	nn_outputs[1] = (nn_outputs[1] + 1) / 2 * MAX_TIME
 
 func set_time(time):
 	_elapsed_time = time
 
 func die():
-	var targets = [score / MAX_SCORE, _elapsed_time / MAX_TIME] # relative value
+	var targets = [score / MAX_SCORE * 2 - 1, _elapsed_time / MAX_TIME * 2 - 1] # relative value between -1 and 1
 	nn.train(nn_inputs, targets)
 	
 	emit_signal("player_died")
